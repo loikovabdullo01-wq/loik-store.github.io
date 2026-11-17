@@ -7,25 +7,11 @@
 <meta name="theme-color" content="#1f1f1f" media="(prefers-color-scheme: dark)">
 <title>Loik Store — Приложения и игры</title>
 
-<!-- ================= ИКОНКИ ДЛЯ ВСЕХ УСТРОЙСТВ ================= -->
-<!-- Favicon для браузеров (ПК) -->
-<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="icon-16.png">
-
-<!-- Основная иконка -->
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-
-<!-- Для iPhone / iOS -->
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="152x152" href="icon-152.png">
-
-<!-- Для Android / PWA -->
+<!-- ИКОНКИ -->
+<link rel="icon" type="image/png" href="icon.png">
 <link rel="manifest" href="manifest.json">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Loik Store">
-<!-- ============================================================== -->
+<link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ================= ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ (ТЕМЫ) ================= */
@@ -53,10 +39,7 @@
   }
 }
 * { box-sizing: border-box; margin: 0; -webkit-tap-highlight-color: transparent; }
-body {
-  font-family: 'Roboto', system-ui, sans-serif; background: var(--bg); color: var(--text-main);
-  min-height: 100vh; display: flex; flex-direction: column; transition: background-color 0.2s, color 0.2s;
-}
+body { font-family: 'Roboto', system-ui, sans-serif; background: var(--bg); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; transition: background-color 0.2s, color 0.2s; }
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font-family: inherit; color: inherit; border: none; background: none; }
 :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
@@ -64,12 +47,8 @@ button, input, select, textarea { font-family: inherit; color: inherit; border: 
 /* ================= ШАПКА ================= */
 header { position: sticky; top: 0; z-index: 100; background: var(--surface); border-bottom: 1px solid var(--border); padding-top: env(safe-area-inset-top); }
 .header-inner { display: flex; align-items: center; gap: 16px; max-width: 1400px; margin: 0 auto; padding: 12px 16px; }
-@media (min-width: 768px) { .header-inner { padding: 12px 24px; } }
-
-/* ЛОГОТИП */
 .logo { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 8px; flex-shrink: 0; color: var(--text-main); }
 .logo img { width: 36px; height: 36px; border-radius: 10px; object-fit: cover; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-
 .search-box { flex: 1; position: relative; max-width: 720px; }
 .search-box input { width: 100%; padding: 12px 16px 12px 48px; border-radius: 8px; background: var(--surface-hover); border: 1px solid transparent; font-size: 16px; transition: .2s; }
 .search-box input:focus { background: var(--surface); border-color: var(--primary); outline: none; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
@@ -91,7 +70,7 @@ header { position: sticky; top: 0; z-index: 100; background: var(--surface); bor
 @media (min-width: 768px) { .main-content { padding: 24px 32px; padding-bottom: 40px; } }
 @media (min-width: 1200px) { .main-content { padding: 32px 48px; } }
 
-/* Нижняя панель (Мобилки) */
+/* Нижняя панель */
 .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: var(--nav-bg); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); }
 @media (min-width: 768px) { .bottom-nav { display: none; } }
 .bottom-nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-sec); font-size: 12px; font-weight: 500; cursor: pointer; padding: 8px 16px; border-radius: 8px; transition: .2s; }
@@ -129,7 +108,7 @@ header { position: sticky; top: 0; z-index: 100; background: var(--surface); bor
 .btn-primary:hover { background: var(--primary-hover); }
 .btn-outline { border: 1px solid var(--border); color: var(--primary); }
 
-/* ================= МОДАЛЬНОЕ ОКНО (КАРТОЧКА) ================= */
+/* ================= МОДАЛЬНОЕ ОКНО ================= */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; display: none; align-items: flex-end; justify-content: center; backdrop-filter: blur(4px); }
 .modal-overlay.open { display: flex; }
 .modal-content { background: var(--surface); width: 100%; max-height: 90vh; overflow-y: auto; border-radius: 24px 24px 0 0; padding: 24px; animation: slideUp .3s ease-out; }
@@ -173,14 +152,6 @@ header { position: sticky; top: 0; z-index: 100; background: var(--surface); bor
 .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: #7b1fa2; color: #fff; display: grid; place-items: center; font-size: 32px; font-weight: bold; }
 .profile-name { font-size: 24px; font-weight: 700; }
 .profile-email { color: var(--text-sec); font-size: 14px; }
-#admin { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
-#admin.on { display: block; }
-#admin form { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
-@media (min-width: 600px) { #admin form { grid-template-columns: 1fr 1fr; } }
-#admin label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-sec); }
-#admin input, #admin select, #admin textarea { padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); font-size: 15px; }
-#admin .full { grid-column: 1 / -1; }
-.hidden { display: none !important; }
 </style>
 </head>
 <body data-theme="system">
@@ -188,11 +159,9 @@ header { position: sticky; top: 0; z-index: 100; background: var(--surface); bor
 <!-- ШАПКА -->
 <header>
   <div class="header-inner">
-    <!-- ИСПРАВЛЕННЫЙ ЛОГОТИП -->
     <a href="#" class="logo" onclick="navigate('home');return false;">
-      <img src="11.webp" alt="Loik Store Logo"> Loik Store
+      <img src="icon.png" alt="Loik Store Logo"> Loik Store
     </a>
-    
     <div class="search-box">
       <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
       <input id="q" type="search" placeholder="Поиск приложений и игр..." aria-label="Поиск">
@@ -229,17 +198,28 @@ header { position: sticky; top: 0; z-index: 100; background: var(--surface); bor
 </div>
 
 <script>
-/* ================= ВАШИ ПРИЛОЖЕНИЯ ================= */
+/* ================= ВАШИ ПРИЛОЖЕНИЯ =================
+   Вставляй сюда свои приложения в таком формате:
+*/
 const APPS = [
-  /* ПРИМЕР (удали этот блок, когда добавишь свой):
+  // ПРИМЕР ТВОЕГО ПРИЛОЖЕНИЯ (замени данные на свои):
   {
-    id: "my-app-1", name: "Мое Приложение", type: "app", cat: "Инструменты",
-    dev: "Твое Имя", ver: "1.0", size: "15 МБ", os: "Android", downloads: "0",
-    emoji: "🚀", color: "#5b3df5", icon: "", 
-    file: "https://github.com/твой_ник/твой_репозиторий/releases/download/v1.0/app.apk", 
-    shots: [], desc: "Описание твоего приложения."
+    id: "geran-express",           // Уникальный ID (без пробелов)
+    name: "Geran Express",         // Название
+    type: "app",                   // "app" - приложение, "game" - игра
+    cat: "Инструменты",            // Категория
+    dev: "Loik",                   // Разработчик
+    ver: "1.0",                    // Версия
+    size: "15 МБ",                 // Размер
+    os: "Android",                 // Платформа
+    downloads: "0",                // Скачиваний
+    emoji: "🚀",                   // Иконка (эмодзи)
+    color: "#5b3df5",              // Цвет иконки
+    icon: "11.webp",                      // Ссылка на картинку (если пусто, будет эмодзи)
+    file: "https://github.com/loikovabdullo01-wq/loik-store.github.io/blob/main/geran-express.apk", // Ссылка на файл
+    shots: [],                     // Скриншоты
+    desc: "Это мое первое приложение. Описание того, что оно делает." // Описание
   }
-  */
 ];
 
 /* ================= ПЕРЕВОДЫ ================= */
@@ -248,7 +228,7 @@ const TRANSLATIONS = {
   en: { home: "Home", games: "Games", apps: "Apps", profile: "Profile", settings: "Settings", recommended: "Recommended", all_apps: "All apps", all_games: "All games", search: "Search apps and games...", install: "Download", open: "Open", rating: "Rating", downloads: "Downloads", size: "Size", version: "Version", about: "About this app", theme: "Theme", lang: "Language", system: "System", light: "Light", dark: "Dark", profile_title: "My Profile", dev_name: "Loik Developer", dev_email: "dev@loik.store", my_apps: "My apps", settings_title: "Settings", settings_theme_desc: "Customize store appearance", settings_lang_desc: "Choose interface language", theme_saved: "Theme changed", lang_saved: "Language changed", no_apps: "No apps yet. Add them in code!", reviews: "Reviews & Ratings", leave_review: "Leave a review", submit_review: "Submit", your_name: "Your name", review_placeholder: "Write what you think about this app...", no_reviews: "No reviews yet. Be the first!" }
 };
 
-/* ================= СОСТОЯНИЕ И ЛОГИКА ================= */
+/* ================= ЛОГИКА ================= */
 let currentLang = localStorage.getItem('loik_lang') || 'ru';
 let currentTheme = localStorage.getItem('loik_theme') || 'system';
 let currentView = 'home';
@@ -342,10 +322,8 @@ function renderAppCard(a) {
         <div class="app-meta">
           <div class="app-rating"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> ${ratingDisplay}</div>
           <span>•</span><span>${a.size}</span>
-          ${reviews.length > 0 ? `<span>•</span><span>${reviews.length} отз.</span>` : ''}
         </div>
       </div>
-      <button class="btn btn-primary" style="display:none" onclick="event.stopPropagation();">${t('install')}</button>
     </div>
   `;
 }
@@ -388,7 +366,6 @@ function openAppModal(id) {
 
     <div class="reviews-section">
       <h3 style="margin-bottom:16px; font-size:18px">${t('reviews')}</h3>
-      
       <div class="review-form">
         <h4 style="margin-bottom:12px; font-size:14px;">${t('leave_review')}</h4>
         <div class="star-input" id="star-input">
@@ -412,7 +389,6 @@ function openAppModal(id) {
       </div>
     </div>
   `;
-
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -428,7 +404,6 @@ function submitReview(appId) {
   const name = document.getElementById('review-name').value.trim();
   const text = document.getElementById('review-text').value.trim();
   if (!text) return alert("Напишите текст отзыва!");
-
   saveReview(appId, { name: name || 'Аноним', stars: selectedRating, text: text, date: new Date().toISOString() });
   selectedRating = 5;
 }
@@ -504,7 +479,7 @@ function showToast(msg) {
 document.getElementById('q').addEventListener('input', (e) => {
   const q = e.target.value.toLowerCase().trim();
   if (!q) { renderView(); return; }
-  const filtered = APPS.filter(a => a.name.toLowerCase().includes(q) || a.dev.toLowerCase().includes(q) || a.cat.toLowerCase().includes(q));
+  const filtered = APPS.filter(a => a.name.toLowerCase().includes(q) || a.dev.toLowerCase().includes(q));
   document.getElementById('app-content').innerHTML = `
     <h1 class="page-title">Результаты поиска: "${q}"</h1>
     <div class="grid">${filtered.length ? filtered.map(a => renderAppCard(a)).join('') : '<div style="text-align:center; padding:40px; color:var(--text-sec)">Ничего не найдено 😔</div>'}</div>
