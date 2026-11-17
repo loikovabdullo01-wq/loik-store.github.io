@@ -1,2108 +1,732 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LOIK STORE — современный интернет-магазин электроники. Смартфоны, наушники, зарядные устройства, флешки, смарт-часы, колонки и аксессуары. Быстрая доставка, гарантия качества.">
-    <meta name="keywords" content="электроника, смартфоны, наушники, зарядники, флешки, smart watch, колонки, аксессуары, магазин электроники, LOIK STORE">
-    <meta name="author" content="LOIK STORE">
-    <meta property="og:title" content="LOIK STORE — SMART ELECTRONICS">
-    <meta property="og:description" content="Премиум интернет-магазин электроники. Смартфоны, гаджеты, аксессуары.">
-    <meta property="og:type" content="website">
-    <title>LOIK STORE — SMART ELECTRONICS | Интернет-магазин электроники</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230066FF'/><text x='32' y='44' text-anchor='middle' font-size='28' font-weight='bold' fill='white' font-family='Arial'>LS</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f5f5f7;
-            --bg-tertiary: #e8e8ed;
-            --text-primary: #1d1d1f;
-            --text-secondary: #6e6e73;
-            --text-tertiary: #86868b;
-            --accent: #0066ff;
-            --accent-hover: #0052cc;
-            --accent-light: #e8f0fe;
-            --accent-glow: rgba(0, 102, 255, 0.3);
-            --card-bg: #ffffff;
-            --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
-            --border: #e5e5ea;
-            --border-light: #f0f0f5;
-            --badge-bg: #ff3b30;
-            --badge-text: #fff;
-            --star-color: #f5a623;
-            --old-price: #b0b0b8;
-            --header-bg: rgba(255, 255, 255, 0.85);
-            --header-blur: blur(20px);
-            --overlay: rgba(0, 0, 0, 0.4);
-            --toast-bg: #1d1d1f;
-            --toast-text: #fff;
-            --skeleton: #e8e8ed;
-            --skeleton-shine: #f5f5f7;
-            --footer-bg: #1d1d1f;
-            --footer-text: #a1a1a6;
-            --footer-heading: #ffffff;
-            --banner-gradient-1: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 30%, #0d1b3e 60%, #0a0a1a 100%);
-            --banner-gradient-2: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 40%, #16213e 70%, #0d0d0d 100%);
-            --banner-gradient-3: linear-gradient(135deg, #050510 0%, #101030 35%, #0a1a30 65%, #050510 100%);
-            --transition-speed: 0.3s;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1f1f1f" media="(prefers-color-scheme: dark)">
+<title>Loik Store — Приложения и игры</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ================= ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ (ТЕМЫ) ================= */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-hover: #f1f3f4;
+  --text-main: #1f1f1f;
+  --text-sec: #5f6368;
+  --border: #dadce0;
+  --primary: #01875f;
+  --primary-hover: #01704e;
+  --nav-bg: #ffffff;
+  --nav-active: #e8f0fe;
+  --nav-text-active: #1967d2;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --radius: 12px;
+}
+[data-theme="dark"] {
+  --bg: #1f1f1f;
+  --surface: #2d2d2d;
+  --surface-hover: #3c3c3c;
+  --text-main: #e8eaed;
+  --text-sec: #9aa0a6;
+  --border: #5f6368;
+  --primary: #00c89c;
+  --primary-hover: #00a680;
+  --nav-bg: #1f1f1f;
+  --nav-active: #3c3c3c;
+  --nav-text-active: #8ab4f8;
+  --shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+@media (prefers-color-scheme: dark) {
+  [data-theme="system"] {
+    --bg: #1f1f1f;
+    --surface: #2d2d2d;
+    --surface-hover: #3c3c3c;
+    --text-main: #e8eaed;
+    --text-sec: #9aa0a6;
+    --border: #5f6368;
+    --primary: #00c89c;
+    --primary-hover: #00a680;
+    --nav-bg: #1f1f1f;
+    --nav-active: #3c3c3c;
+    --nav-text-active: #8ab4f8;
+    --shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+}
 
-        [data-theme="dark"] {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-tertiary: #1c1c28;
-            --text-primary: #f5f5f7;
-            --text-secondary: #a1a1a6;
-            --text-tertiary: #6e6e73;
-            --accent: #3399ff;
-            --accent-hover: #4da6ff;
-            --accent-light: #0d1b33;
-            --accent-glow: rgba(51, 153, 255, 0.4);
-            --card-bg: #161622;
-            --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-            --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.5);
-            --border: #2a2a3a;
-            --border-light: #1e1e30;
-            --badge-bg: #ff453a;
-            --old-price: #555560;
-            --header-bg: rgba(10, 10, 15, 0.85);
-            --overlay: rgba(0, 0, 0, 0.7);
-            --toast-bg: #f5f5f7;
-            --toast-text: #1d1d1f;
-            --skeleton: #1c1c28;
-            --skeleton-shine: #242436;
-            --footer-bg: #050510;
-            --footer-text: #6e6e73;
-            --footer-heading: #e5e5ea;
-        }
+* { box-sizing: border-box; margin: 0; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: 'Roboto', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.2s, color 0.2s;
+}
+a { color: inherit; text-decoration: none; }
+button, input, select { font-family: inherit; color: inherit; border: none; background: none; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* ================= ШАПКА ================= */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding-top: env(safe-area-inset-top);
+}
+.header-inner {
+  display: flex; align-items: center; gap: 16px;
+  max-width: 1400px; margin: 0 auto; padding: 12px 16px;
+}
+@media (min-width: 768px) { .header-inner { padding: 12px 24px; } }
 
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
+.logo { font-size: 22px; font-weight: 500; display: flex; align-items: center; gap: 8px; flex-shrink: 0; color: var(--text-main); }
+.logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, #00c89c, #01704e); border-radius: 8px; display: grid; place-items: center; color: #fff; font-weight: bold; }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.5;
-            transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+.search-box { flex: 1; position: relative; max-width: 720px; }
+.search-box input {
+  width: 100%; padding: 12px 16px 12px 48px; border-radius: 8px;
+  background: var(--surface-hover); border: 1px solid transparent;
+  font-size: 16px; transition: .2s;
+}
+.search-box input:focus { background: var(--surface); border-color: var(--primary); outline: none; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.search-box svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; fill: var(--text-sec); }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--text-tertiary);
-            border-radius: 10px;
-        }
+.header-actions { display: flex; gap: 8px; align-items: center; margin-left: auto; }
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  cursor: pointer; color: var(--text-sec); transition: background .2s;
+}
+.icon-btn:hover { background: var(--surface-hover); }
+.avatar-btn { width: 32px; height: 32px; border-radius: 50%; background: #7b1fa2; color: #fff; display: grid; place-items: center; font-weight: bold; cursor: pointer; font-size: 14px; }
 
-        /* HEADER */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: var(--header-bg);
-            backdrop-filter: var(--header-blur);
-            -webkit-backdrop-filter: var(--header-blur);
-            border-bottom: 1px solid var(--border);
-            transition: all var(--transition-speed) ease;
-            padding: 0 20px;
-        }
-        .header-inner {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 64px;
-            gap: 16px;
-        }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: -1px;
-            color: var(--text-primary);
-            text-decoration: none;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            user-select: none;
-        }
-        .logo-icon {
-            width: 38px;
-            height: 38px;
-            background: var(--accent);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 900;
-            font-size: 1rem;
-            letter-spacing: 0;
-            box-shadow: 0 4px 15px var(--accent-glow);
-            transition: transform 0.3s ease;
-        }
-        .logo:hover .logo-icon {
-            transform: scale(1.08) rotate(-5deg);
-        }
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1;
-        }
-        .logo-main {
-            font-size: 1.3rem;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-        }
-        .logo-sub {
-            font-size: 0.6rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-        }
+/* ================= МАКЕТ ================= */
+.layout { display: flex; flex: 1; max-width: 1400px; margin: 0 auto; width: 100%; }
 
-        .nav {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-        .nav a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 0.9rem;
-            padding: 8px 14px;
-            border-radius: 20px;
-            transition: all 0.25s ease;
-            white-space: nowrap;
-            cursor: pointer;
-        }
-        .nav a:hover,
-        .nav a.active {
-            color: var(--accent);
-            background: var(--accent-light);
-        }
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .icon-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            transition: all 0.25s ease;
-            position: relative;
-            flex-shrink: 0;
-        }
-        .icon-btn:hover {
-            background: var(--bg-tertiary);
-            color: var(--accent);
-        }
-        .cart-badge {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            background: var(--badge-bg);
-            color: var(--badge-text);
-            font-size: 0.65rem;
-            font-weight: 700;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: pulse-badge 2s infinite;
-        }
-        @keyframes pulse-badge {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.15);
-            }
-        }
-        .search-container {
-            position: relative;
-        }
-        .search-input {
-            width: 180px;
-            padding: 10px 16px 10px 38px;
-            border-radius: 25px;
-            border: 2px solid var(--border);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            outline: none;
-            font-family: inherit;
-        }
-        .search-input:focus {
-            width: 240px;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px var(--accent-light);
-        }
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-tertiary);
-            pointer-events: none;
-            font-size: 0.9rem;
-        }
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.6rem;
-            color: var(--text-primary);
-            padding: 4px;
-        }
+/* Боковое меню (ПК) */
+.sidebar { display: none; width: 240px; padding: 16px 12px; flex-shrink: 0; position: sticky; top: 65px; height: calc(100vh - 65px); overflow-y: auto; }
+@media (min-width: 768px) { .sidebar { display: block; } }
+.nav-item {
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+  border-radius: 0 24px 24px 0; color: var(--text-main); font-weight: 500;
+  cursor: pointer; margin-bottom: 4px; transition: .2s;
+}
+.nav-item:hover { background: var(--surface-hover); }
+.nav-item.active { background: var(--nav-active); color: var(--nav-text-active); font-weight: 700; }
+.nav-item svg { width: 24px; height: 24px; fill: currentColor; }
 
-        /* MOBILE NAV */
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 64px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--bg-primary);
-            z-index: 999;
-            flex-direction: column;
-            padding: 20px;
-            gap: 4px;
-            overflow-y: auto;
-            transition: transform 0.3s ease;
-            transform: translateX(-100%);
-        }
-        .mobile-nav.open {
-            transform: translateX(0);
-            display: flex;
-        }
-        .mobile-nav a {
-            display: block;
-            padding: 14px 20px;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 1rem;
-            border-radius: 12px;
-            transition: all 0.2s ease;
-        }
-        .mobile-nav a:hover,
-        .mobile-nav a.active {
-            background: var(--accent-light);
-            color: var(--accent);
-        }
+/* Контент */
+.main-content { flex: 1; padding: 16px; padding-bottom: 80px; min-width: 0; }
+@media (min-width: 768px) { .main-content { padding: 24px 32px; padding-bottom: 40px; } }
+@media (min-width: 1200px) { .main-content { padding: 32px 48px; } }
 
-        /* BANNER */
-        .banner-section {
-            max-width: 1300px;
-            margin: 20px auto;
-            padding: 0 20px;
-            position: relative;
-        }
-        .banner-slider {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            height: 380px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-        .banner-slide {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 40px 60px;
-            border-radius: 20px;
-            transform: scale(1.02);
-        }
-        .banner-slide.active {
-            opacity: 1;
-            transform: scale(1);
-            z-index: 1;
-        }
-        .banner-slide:nth-child(1) {
-            background: var(--banner-gradient-1);
-        }
-        .banner-slide:nth-child(2) {
-            background: var(--banner-gradient-2);
-        }
-        .banner-slide:nth-child(3) {
-            background: var(--banner-gradient-3);
-        }
-        .banner-content {
-            color: #fff;
-            max-width: 480px;
-            z-index: 2;
-        }
-        .banner-tag {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-        }
-        .banner-content h2 {
-            font-size: 2.8rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 12px;
-            letter-spacing: -1px;
-        }
-        .banner-content p {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            margin-bottom: 24px;
-            line-height: 1.5;
-        }
-        .banner-btn {
-            display: inline-block;
-            background: #fff;
-            color: #000;
-            padding: 14px 32px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            letter-spacing: -0.3px;
-        }
-        .banner-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-            background: #f0f0f0;
-        }
-        .banner-visual {
-            font-size: 10rem;
-            z-index: 2;
-            animation: float 4s ease-in-out infinite;
-            filter: drop-shadow(0 20px 40px rgba(255, 255, 255, 0.2));
-        }
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-        .banner-dots {
-            display: flex;
-            gap: 10px;
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 5;
-        }
-        .banner-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        .banner-dot.active {
-            background: #fff;
-            width: 30px;
-            border-radius: 20px;
-            border-color: #fff;
-        }
-        .banner-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 5;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: #fff;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .banner-arrow:hover {
-            background: rgba(255, 255, 255, 0.35);
-        }
-        .banner-arrow.prev {
-            left: 16px;
-        }
-        .banner-arrow.next {
-            right: 16px;
-        }
+/* Нижняя панель (Мобилки) */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: var(--nav-bg); border-top: 1px solid var(--border);
+  display: flex; justify-content: space-around; padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+}
+@media (min-width: 768px) { .bottom-nav { display: none; } }
+.bottom-nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-sec); font-size: 12px; font-weight: 500; cursor: pointer; padding: 8px 16px; border-radius: 8px; transition: .2s; }
+.bottom-nav-item svg { width: 24px; height: 24px; fill: currentColor; }
+.bottom-nav-item.active { color: var(--nav-text-active); }
+.bottom-nav-item.active svg { fill: var(--nav-text-active); }
 
-        /* CATEGORIES */
-        .categories-section {
-            max-width: 1300px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-        .section-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-        .categories-grid {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            overflow-x: auto;
-            padding-bottom: 8px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        .categories-grid::-webkit-scrollbar {
-            height: 0;
-        }
-        .category-chip {
-            flex-shrink: 0;
-            padding: 10px 20px;
-            border-radius: 25px;
-            border: 2px solid var(--border);
-            background: var(--card-bg);
-            color: var(--text-primary);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            scroll-snap-align: start;
-            user-select: none;
-            font-family: inherit;
-        }
-        .category-chip:hover,
-        .category-chip.active {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-            box-shadow: 0 4px 15px var(--accent-glow);
-            transform: translateY(-2px);
-        }
+/* ================= ЭЛЕМЕНТЫ КАТАЛОГА ================= */
+.page-title { font-size: 20px; font-weight: 500; margin-bottom: 16px; }
+@media (min-width: 768px) { .page-title { font-size: 24px; margin-bottom: 24px; } }
 
-        /* PRODUCTS */
-        .products-section {
-            max-width: 1300px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-            gap: 16px;
-        }
-        .product-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 16px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid var(--border-light);
-            position: relative;
-            box-shadow: var(--card-shadow);
-            display: flex;
-            flex-direction: column;
-            animation: fadeInUp 0.5s ease forwards;
-            opacity: 0;
-        }
-        .product-card.visible {
-            opacity: 1;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--card-shadow-hover);
-            border-color: var(--accent);
-        }
-        .product-img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            margin-bottom: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-        .product-img-bg {
-            position: absolute;
-            inset: 0;
-            border-radius: 12px;
-            opacity: 0.08;
-        }
-        .product-badge {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: var(--badge-bg);
-            color: #fff;
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 12px;
-            z-index: 2;
-            letter-spacing: 0.5px;
-        }
-        .product-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 6px;
-            line-height: 1.3;
-            color: var(--text-primary);
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .product-rating {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.8rem;
-            color: var(--star-color);
-            margin-bottom: 6px;
-        }
-        .product-rating span {
-            color: var(--text-tertiary);
-            font-size: 0.75rem;
-        }
-        .product-price-row {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-        .product-price {
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            letter-spacing: -0.5px;
-        }
-        .product-old-price {
-            font-size: 0.85rem;
-            color: var(--old-price);
-            text-decoration: line-through;
-            font-weight: 400;
-        }
-        .product-discount {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #ff3b30;
-            background: rgba(255, 59, 48, 0.1);
-            padding: 2px 8px;
-            border-radius: 10px;
-        }
-        .product-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: auto;
-        }
-        .btn {
-            padding: 10px 16px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            border: none;
-            transition: all 0.25s ease;
-            font-family: inherit;
-            letter-spacing: -0.3px;
-            white-space: nowrap;
-        }
-        .btn-primary {
-            background: var(--accent);
-            color: #fff;
-            flex: 1;
-            box-shadow: 0 4px 12px var(--accent-glow);
-        }
-        .btn-primary:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px var(--accent-glow);
-        }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--border);
-            color: var(--text-primary);
-            padding: 10px 12px;
-        }
-        .btn-outline:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--accent-light);
-        }
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px;
+}
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; } }
 
-        /* SKELETON */
-        .skeleton-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 16px;
-            border: 1px solid var(--border-light);
-            animation: shimmer 1.5s infinite;
-        }
-        .skeleton-img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            border-radius: 12px;
-            background: var(--skeleton);
-            margin-bottom: 12px;
-        }
-        .skeleton-line {
-            height: 14px;
-            border-radius: 7px;
-            background: var(--skeleton);
-            margin-bottom: 8px;
-        }
-        .skeleton-line.short {
-            width: 60%;
-        }
-        .skeleton-line.medium {
-            width: 80%;
-        }
-        @keyframes shimmer {
-            0% {
-                background-position: -200px 0;
-            }
-            100% {
-                background-position: 200px 0;
-            }
-        }
+/* Карточка как в Play Market */
+.app-card {
+  display: flex; flex-direction: column; gap: 12px;
+  cursor: pointer; transition: transform .1s;
+}
+@media (min-width: 768px) { .app-card { flex-direction: row; align-items: center; gap: 16px; } }
+.app-card:hover .app-icon { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
 
-        /* ABOUT */
-        .about-section {
-            max-width: 1300px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .about-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 28px 22px;
-            text-align: center;
-            border: 1px solid var(--border-light);
-            transition: all 0.3s ease;
-            box-shadow: var(--card-shadow);
-        }
-        .about-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-shadow-hover);
-        }
-        .about-icon {
-            font-size: 2.8rem;
-            margin-bottom: 14px;
-        }
-        .about-card h3 {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-        .about-card p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
+.app-icon {
+  width: 64px; height: 64px; border-radius: 16px; flex-shrink: 0;
+  display: grid; place-items: center; font-size: 32px; color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; transition: .2s;
+}
+@media (min-width: 768px) { .app-icon { width: 80px; height: 80px; font-size: 40px; border-radius: 20px; } }
+.app-icon img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* REVIEWS */
-        .reviews-section {
-            max-width: 1300px;
-            margin: 50px auto;
-            padding: 0 20px;
-            overflow: hidden;
-        }
-        .reviews-slider {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding-bottom: 10px;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-        }
-        .reviews-slider::-webkit-scrollbar {
-            height: 4px;
-        }
-        .review-card {
-            flex-shrink: 0;
-            width: 320px;
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 24px;
-            border: 1px solid var(--border-light);
-            scroll-snap-align: start;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-        }
-        .review-card:hover {
-            box-shadow: var(--card-shadow-hover);
-            transform: translateY(-3px);
-        }
-        .review-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        .review-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--bg-tertiary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent);
-            flex-shrink: 0;
-        }
-        .review-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-        }
-        .review-stars {
-            color: var(--star-color);
-            font-size: 0.9rem;
-        }
-        .review-text {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-style: italic;
-        }
+.app-info { flex: 1; min-width: 0; }
+.app-title { font-size: 16px; font-weight: 500; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app-dev { font-size: 13px; color: var(--text-sec); margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-sec); }
+.app-rating { display: flex; align-items: center; gap: 2px; }
+.app-rating svg { width: 12px; height: 12px; fill: var(--text-main); }
 
-        /* FOOTER */
-        .footer {
-            background: var(--footer-bg);
-            color: var(--footer-text);
-            padding: 50px 20px 30px;
-            margin-top: 60px;
-        }
-        .footer-inner {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-        .footer-col h4 {
-            color: var(--footer-heading);
-            font-weight: 700;
-            margin-bottom: 14px;
-            font-size: 1rem;
-        }
-        .footer-col a,
-        .footer-col p {
-            display: block;
-            color: var(--footer-text);
-            text-decoration: none;
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-            transition: color 0.2s;
-        }
-        .footer-col a:hover {
-            color: var(--accent);
-        }
-        .footer-bottom {
-            max-width: 1300px;
-            margin: 30px auto 0;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--footer-text);
-        }
+/* Ряды с горизонтальным скроллом */
+.h-scroll-row { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 16px; scrollbar-width: none; margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
+@media (min-width: 768px) { .h-scroll-row { margin: 0; padding-left: 0; padding-right: 0; } }
+.h-scroll-row::-webkit-scrollbar { display: none; }
+.h-card { flex: 0 0 140px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
+.h-card .app-icon { width: 100%; height: 140px; border-radius: 16px; font-size: 64px; }
+.h-card .app-title { font-size: 14px; text-align: center; margin: 0; }
 
-        /* TOAST */
-        .toast-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .toast {
-            background: var(--toast-bg);
-            color: var(--toast-text);
-            padding: 14px 20px;
-            border-radius: 12px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: slideInRight 0.4s ease, fadeOut 0.4s ease 2.5s forwards;
-            max-width: 350px;
-        }
-        @keyframes slideInRight {
-            from {
-                transform: translateX(120%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-        }
+/* Кнопки */
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 8px 24px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; transition: .2s; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-outline { border: 1px solid var(--border); color: var(--primary); }
 
-        /* BACK TO TOP */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            z-index: 999;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px var(--accent-glow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .back-to-top:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px var(--accent-glow);
-        }
+/* ================= МОДАЛЬНОЕ ОКНО (КАРТОЧКА) ================= */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; display: none; align-items: flex-end; justify-content: center; backdrop-filter: blur(4px); }
+.modal-overlay.open { display: flex; }
+.modal-content {
+  background: var(--surface); width: 100%; max-height: 90vh; overflow-y: auto;
+  border-radius: 24px 24px 0 0; padding: 24px;
+  animation: slideUp .3s ease-out;
+}
+@media (min-width: 768px) {
+  .modal-overlay { align-items: center; padding: 24px; }
+  .modal-content { max-width: 800px; border-radius: 24px; padding: 32px; }
+}
+@keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        /* CART SIDEBAR */
-        .cart-overlay {
-            position: fixed;
-            inset: 0;
-            background: var(--overlay);
-            z-index: 2000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        .cart-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 400px;
-            max-width: 90vw;
-            height: 100vh;
-            background: var(--bg-primary);
-            z-index: 2001;
-            transform: translateX(100%);
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.25);
-        }
-        .cart-sidebar.open {
-            transform: translateX(0);
-        }
-        .cart-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        .cart-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-primary);
-            padding: 4px 8px;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-        .cart-close:hover {
-            background: var(--bg-tertiary);
-        }
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .cart-item {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            padding: 12px;
-            border-radius: 14px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-light);
-        }
-        .cart-item-img {
-            font-size: 2.5rem;
-            width: 50px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-        .cart-item-info {
-            flex: 1;
-            min-width: 0;
-        }
-        .cart-item-title {
-            font-weight: 600;
-            font-size: 0.85rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .cart-item-price {
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--accent);
-        }
-        .cart-item-remove {
-            background: none;
-            border: none;
-            color: #ff3b30;
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 4px 8px;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-        .cart-item-remove:hover {
-            background: rgba(255, 59, 48, 0.1);
-        }
-        .cart-footer {
-            padding: 16px 24px;
-            border-top: 1px solid var(--border);
-        }
-        .cart-total {
-            font-weight: 800;
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .cart-checkout {
-            width: 100%;
-            padding: 14px;
-            border-radius: 30px;
-            background: var(--accent);
-            color: #fff;
-            font-weight: 700;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: inherit;
-        }
-        .cart-checkout:hover {
-            background: var(--accent-hover);
-            box-shadow: 0 8px 25px var(--accent-glow);
-        }
-        .cart-empty {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-tertiary);
-            font-size: 3rem;
-        }
+.modal-header { display: flex; gap: 16px; align-items: center; margin-bottom: 24px; }
+.modal-header .app-icon { width: 80px; height: 80px; font-size: 40px; }
+@media (min-width: 768px) { .modal-header .app-icon { width: 96px; height: 96px; } }
+.modal-header h2 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+.modal-header p { color: var(--primary); font-weight: 500; font-size: 14px; }
 
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .nav {
-                display: none;
-            }
-            .mobile-menu-btn {
-                display: block;
-            }
-            .search-input {
-                width: 120px;
-            }
-            .search-input:focus {
-                width: 160px;
-            }
-            .banner-slider {
-                height: 280px;
-            }
-            .banner-slide {
-                padding: 24px 30px;
-            }
-            .banner-content h2 {
-                font-size: 1.8rem;
-            }
-            .banner-visual {
-                font-size: 6rem;
-            }
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-                gap: 10px;
-            }
-            .product-card {
-                padding: 10px;
-                border-radius: 12px;
-            }
-        }
-        @media (max-width: 640px) {
-            .header-inner {
-                height: 56px;
-                gap: 8px;
-            }
-            .logo-main {
-                font-size: 1.1rem;
-            }
-            .logo-icon {
-                width: 30px;
-                height: 30px;
-                font-size: 0.8rem;
-                border-radius: 8px;
-            }
-            .logo-sub {
-                font-size: 0.5rem;
-                letter-spacing: 1px;
-            }
-            .search-input {
-                width: 80px;
-                font-size: 0.75rem;
-                padding: 8px 10px 8px 30px;
-            }
-            .search-input:focus {
-                width: 120px;
-            }
-            .icon-btn {
-                width: 34px;
-                height: 34px;
-                font-size: 1rem;
-            }
-            .banner-slider {
-                height: 220px;
-                border-radius: 14px;
-            }
-            .banner-slide {
-                padding: 16px 20px;
-                flex-direction: column;
-                text-align: center;
-                justify-content: center;
-            }
-            .banner-content h2 {
-                font-size: 1.3rem;
-            }
-            .banner-content p {
-                font-size: 0.8rem;
-                margin-bottom: 12px;
-            }
-            .banner-btn {
-                padding: 10px 22px;
-                font-size: 0.8rem;
-            }
-            .banner-visual {
-                font-size: 3.5rem;
-                position: absolute;
-                opacity: 0.3;
-                right: 10px;
-                bottom: 10px;
-            }
-            .banner-arrow {
-                width: 32px;
-                height: 32px;
-                font-size: 1rem;
-            }
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-            .product-card {
-                padding: 8px;
-                border-radius: 10px;
-            }
-            .product-img {
-                font-size: 2.5rem;
-                border-radius: 8px;
-            }
-            .product-title {
-                font-size: 0.78rem;
-            }
-            .product-price {
-                font-size: 0.95rem;
-            }
-            .btn {
-                padding: 8px 10px;
-                font-size: 0.72rem;
-            }
-            .categories-grid {
-                gap: 6px;
-            }
-            .category-chip {
-                padding: 8px 14px;
-                font-size: 0.78rem;
-                border-radius: 20px;
-            }
-            .section-title {
-                font-size: 1.3rem;
-            }
-            .cart-sidebar {
-                width: 100%;
-                max-width: 100vw;
-            }
-            .about-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            .review-card {
-                width: 260px;
-                padding: 16px;
-            }
-            .footer-inner {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            .toast-container {
-                bottom: 16px;
-                right: 16px;
-                left: 16px;
-            }
-            .toast {
-                max-width: 100%;
-                font-size: 0.8rem;
-            }
-        }
-        @media (max-width: 380px) {
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 6px;
-            }
-            .product-card {
-                padding: 6px;
-                border-radius: 8px;
-            }
-            .header-inner {
-                gap: 4px;
-            }
-            .search-input {
-                width: 60px;
-                padding: 6px 6px 6px 24px;
-            }
-            .search-input:focus {
-                width: 90px;
-            }
-        }
-    </style>
+.modal-stats { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 16px 0; margin-bottom: 24px; }
+.stat-item { text-align: center; flex: 1; border-right: 1px solid var(--border); }
+.stat-item:last-child { border: none; }
+.stat-item b { display: block; font-size: 16px; margin-bottom: 4px; }
+.stat-item span { font-size: 12px; color: var(--text-sec); }
+
+.shots-row { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 24px; scrollbar-width: none; }
+.shots-row::-webkit-scrollbar { display: none; }
+.shots-row img { height: 200px; border-radius: 12px; border: 1px solid var(--border); }
+
+/* ================= НАСТРОЙКИ И ПРОФИЛЬ ================= */
+.settings-group { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+.settings-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.settings-item:last-child { border: none; }
+.settings-label { font-weight: 500; margin-bottom: 4px; }
+.settings-desc { font-size: 13px; color: var(--text-sec); }
+
+/* Переключатели темы */
+.theme-selector { display: flex; gap: 8px; }
+.theme-btn { flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; transition: .2s; background: var(--bg); }
+.theme-btn.active { border-color: var(--primary); background: var(--nav-active); color: var(--nav-text-active); }
+.theme-btn svg { width: 24px; height: 24px; fill: currentColor; }
+
+/* Профиль */
+.profile-header { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; }
+.profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: #7b1fa2; color: #fff; display: grid; place-items: center; font-size: 32px; font-weight: bold; }
+.profile-name { font-size: 24px; font-weight: 700; }
+.profile-email { color: var(--text-sec); font-size: 14px; }
+
+/* Админка */
+#admin { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+#admin.on { display: block; }
+#admin form { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
+@media (min-width: 600px) { #admin form { grid-template-columns: 1fr 1fr; } }
+#admin label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-sec); }
+#admin input, #admin select, #admin textarea { padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); font-size: 15px; }
+#admin .full { grid-column: 1 / -1; }
+
+.hidden { display: none !important; }
+</style>
 </head>
-<body>
+<body data-theme="system">
 
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <div class="header-inner">
-            <a class="logo" onclick="scrollToSection('home')" title="LOIK STORE">
-                <div class="logo-icon">LS</div>
-                <div class="logo-text">
-                    <span class="logo-main">LOIK STORE</span>
-                    <span class="logo-sub" data-i18n="slogan">SMART ELECTRONICS</span>
-                </div>
-            </a>
-            <nav class="nav" id="desktopNav">
-                <a onclick="scrollToSection('home')" class="active" data-i18n="nav_home">Главная</a>
-                <a onclick="scrollToSection('categories')" data-i18n="nav_categories">Категории</a>
-                <a onclick="scrollToSection('about')" data-i18n="nav_about">О нас</a>
-                <a onclick="scrollToSection('reviews')" data-i18n="nav_reviews">Отзывы</a>
-                <a onclick="scrollToSection('contacts')" data-i18n="nav_contacts">Контакты</a>
-            </nav>
-            <div class="header-actions">
-                <div class="search-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" class="search-input" data-i18n-placeholder="search_placeholder" placeholder="Поиск..." id="searchInput" oninput="filterProducts()">
-                </div>
-                <button class="icon-btn" onclick="toggleTheme()" title="Переключить тему" aria-label="Переключить тему">🌓</button>
-                <button class="icon-btn" onclick="toggleLanguage()" title="Забон / Язык" aria-label="Переключить язык" id="langBtn">🇷🇺</button>
-                <button class="icon-btn" onclick="toggleCart()" title="Корзина" aria-label="Корзина">
-                    🛒<span class="cart-badge" id="cartBadge" style="display:none">0</span>
-                </button>
-                <button class="icon-btn" title="Профиль" aria-label="Профиль">👤</button>
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Меню">☰</button>
-            </div>
-        </div>
-    </header>
-
-    <!-- MOBILE NAV -->
-    <nav class="mobile-nav" id="mobileNav">
-        <a onclick="scrollToSection('home');closeMobileMenu()" class="active" data-i18n="nav_home">Главная</a>
-        <a onclick="scrollToSection('categories');closeMobileMenu()" data-i18n="nav_categories">Категории</a>
-        <a onclick="scrollToSection('about');closeMobileMenu()" data-i18n="nav_about">О нас</a>
-        <a onclick="scrollToSection('reviews');closeMobileMenu()" data-i18n="nav_reviews">Отзывы</a>
-        <a onclick="scrollToSection('contacts');closeMobileMenu()" data-i18n="nav_contacts">Контакты</a>
-    </nav>
-
-    <!-- BANNER -->
-    <section class="banner-section" id="home">
-        <div class="banner-slider" id="bannerSlider">
-            <div class="banner-slide active">
-                <div class="banner-content">
-                    <span class="banner-tag" data-i18n="banner_tag_1">Новинка 2026</span>
-                    <h2 data-i18n="banner_title_1">Флагманские смартфоны</h2>
-                    <p data-i18n="banner_desc_1">Мощные процессоры, яркие дисплеи и профессиональные камеры</p>
-                    <button class="banner-btn" onclick="scrollToSection('categories')" data-i18n="buy_now">Купить сейчас</button>
-                </div>
-                <div class="banner-visual">📱</div>
-            </div>
-            <div class="banner-slide">
-                <div class="banner-content">
-                    <span class="banner-tag" data-i18n="banner_tag_2">Хит продаж</span>
-                    <h2 data-i18n="banner_title_2">Беспроводные наушники</h2>
-                    <p data-i18n="banner_desc_2">Чистый звук, активное шумоподавление и 40 часов работы</p>
-                    <button class="banner-btn" onclick="scrollToSection('categories')" data-i18n="buy_now">Купить сейчас</button>
-                </div>
-                <div class="banner-visual">🎧</div>
-            </div>
-            <div class="banner-slide">
-                <div class="banner-content">
-                    <span class="banner-tag" data-i18n="banner_tag_3">Аксессуары</span>
-                    <h2 data-i18n="banner_title_3">Зарядки и гаджеты</h2>
-                    <p data-i18n="banner_desc_3">Быстрая зарядка, кабели, флешки и умные часы</p>
-                    <button class="banner-btn" onclick="scrollToSection('categories')" data-i18n="buy_now">Купить сейчас</button>
-                </div>
-                <div class="banner-visual">⚡</div>
-            </div>
-            <div class="banner-dots" id="bannerDots">
-                <span class="banner-dot active" data-index="0"></span>
-                <span class="banner-dot" data-index="1"></span>
-                <span class="banner-dot" data-index="2"></span>
-            </div>
-            <button class="banner-arrow prev" onclick="prevBanner()">◀</button>
-            <button class="banner-arrow next" onclick="nextBanner()">▶</button>
-        </div>
-    </section>
-
-    <!-- CATEGORIES -->
-    <section class="categories-section" id="categories">
-        <h2 class="section-title" data-i18n="categories_title">Категории</h2>
-        <div class="categories-grid" id="categoriesGrid">
-            <button class="category-chip active" data-category="all" onclick="filterByCategory('all', this)" data-i18n="cat_all">Все товары</button>
-            <button class="category-chip" data-category="smartphones" onclick="filterByCategory('smartphones', this)" data-i18n="cat_phones">📱 Смартфоны</button>
-            <button class="category-chip" data-category="headphones" onclick="filterByCategory('headphones', this)" data-i18n="cat_headphones">🎧 Наушники</button>
-            <button class="category-chip" data-category="chargers" onclick="filterByCategory('chargers', this)" data-i18n="cat_chargers">🔌 Зарядники</button>
-            <button class="category-chip" data-category="flashdrives" onclick="filterByCategory('flashdrives', this)" data-i18n="cat_flash">💾 Флешки</button>
-            <button class="category-chip" data-category="watches" onclick="filterByCategory('watches', this)" data-i18n="cat_watches">⌚ Smart Watch</button>
-            <button class="category-chip" data-category="speakers" onclick="filterByCategory('speakers', this)" data-i18n="cat_speakers">🔊 Колонки</button>
-            <button class="category-chip" data-category="accessories" onclick="filterByCategory('accessories', this)" data-i18n="cat_accessories">🎮 Аксессуары</button>
-        </div>
-    </section>
-
-    <!-- PRODUCTS -->
-    <section class="products-section">
-        <h2 class="section-title" data-i18n="products_title" id="productsTitle">Все товары</h2>
-        <div class="products-grid" id="productsGrid">
-            <!-- Skeleton loaders appear briefly -->
-        </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="about-section" id="about">
-        <h2 class="section-title" data-i18n="about_title">О нас</h2>
-        <div class="about-grid">
-            <div class="about-card">
-                <div class="about-icon">🏪</div>
-                <h3 data-i18n="about_1_title">Кто мы</h3>
-                <p data-i18n="about_1_desc">LOIK STORE — современный магазин электроники с фокусом на качество и сервис</p>
-            </div>
-            <div class="about-card">
-                <div class="about-icon">📦</div>
-                <h3 data-i18n="about_2_title">Доставка</h3>
-                <p data-i18n="about_2_desc">Быстрая доставка по всей стране. Отправка в день заказа</p>
-            </div>
-            <div class="about-card">
-                <div class="about-icon">🛡️</div>
-                <h3 data-i18n="about_3_title">Гарантия</h3>
-                <p data-i18n="about_3_desc">Официальная гарантия на все товары. Возврат в течение 30 дней</p>
-            </div>
-            <div class="about-card">
-                <div class="about-icon">⭐</div>
-                <h3 data-i18n="about_4_title">Сервис</h3>
-                <p data-i18n="about_4_desc">Поддержка 24/7. Поможем с выбором и настройкой устройств</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- REVIEWS -->
-    <section class="reviews-section" id="reviews">
-        <h2 class="section-title" data-i18n="reviews_title">Отзывы клиентов</h2>
-        <div class="reviews-slider" id="reviewsSlider"></div>
-    </section>
-
-    <!-- CONTACTS -->
-    <section class="about-section" id="contacts" style="margin-top:40px;">
-        <h2 class="section-title" data-i18n="contacts_title">Контакты</h2>
-        <div class="about-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
-            <div class="about-card">
-                <div class="about-icon">📞</div>
-                <h3 data-i18n="contact_phone">Телефон</h3>
-                <p>+992 987 654 321</p>
-            </div>
-            <div class="about-card">
-                <div class="about-icon">✉️</div>
-                <h3 data-i18n="contact_email">Email</h3>
-                <p>hello@loikstore.tj</p>
-            </div>
-            <div class="about-card">
-                <div class="about-icon">📍</div>
-                <h3 data-i18n="contact_address">Адрес</h3>
-                <p data-i18n="contact_address_text">Душанбе, ул. Рудаки 123</p>
-            </div>
-            <div class="about-card">
-                <div class="about-icon">🕐</div>
-                <h3 data-i18n="contact_hours">Часы работы</h3>
-                <p>09:00 – 21:00</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer" id="footer">
-        <div class="footer-inner">
-            <div class="footer-col">
-                <h4>LOIK STORE</h4>
-                <p data-i18n="slogan">SMART ELECTRONICS</p>
-                <p>© 2026 LOIK STORE</p>
-            </div>
-            <div class="footer-col">
-                <h4 data-i18n="footer_shop">Магазин</h4>
-                <a onclick="scrollToSection('categories')" data-i18n="nav_categories">Категории</a>
-                <a onclick="scrollToSection('home')" data-i18n="footer_new">Новинки</a>
-                <a onclick="scrollToSection('categories')" data-i18n="footer_sale">Акции</a>
-            </div>
-            <div class="footer-col">
-                <h4 data-i18n="footer_help">Помощь</h4>
-                <a onclick="scrollToSection('contacts')" data-i18n="nav_contacts">Контакты</a>
-                <a onclick="scrollToSection('about')" data-i18n="footer_warranty">Гарантия</a>
-                <a onclick="scrollToSection('about')" data-i18n="footer_delivery">Доставка</a>
-            </div>
-            <div class="footer-col">
-                <h4 data-i18n="footer_social">Соцсети</h4>
-                <a href="#">📱 Instagram</a>
-                <a href="#">💬 Telegram</a>
-                <a href="#">📺 YouTube</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 LOIK STORE. <span data-i18n="footer_rights">Все права защищены.</span></p>
-        </div>
-    </footer>
-
-    <!-- CART OVERLAY & SIDEBAR -->
-    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <span data-i18n="cart_title">🛒 Корзина</span>
-            <button class="cart-close" onclick="toggleCart()">✕</button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <div class="cart-empty">🛒</div>
-            <p style="text-align:center;color:var(--text-tertiary)" data-i18n="cart_empty">Корзина пуста</p>
-        </div>
-        <div class="cart-footer" id="cartFooter" style="display:none;">
-            <div class="cart-total"><span data-i18n="cart_total">Итого:</span> <span id="cartTotal">0 ₽</span></div>
-            <button class="cart-checkout" onclick="checkout()" data-i18n="checkout">Оформить заказ</button>
-        </div>
+<!-- ШАПКА -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo" onclick="navigate('home');return false;">
+      <div class="logo-icon">L</div> Loik Store
+    </a>
+    
+    <div class="search-box">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input id="q" type="search" placeholder="Поиск приложений и игр..." aria-label="Поиск">
     </div>
 
-    <!-- TOAST CONTAINER -->
-    <div class="toast-container" id="toastContainer"></div>
+    <div class="header-actions">
+      <button class="icon-btn" onclick="navigate('settings')" aria-label="Настройки">
+        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+      </button>
+      <div class="avatar-btn" onclick="navigate('profile')">L</div>
+    </div>
+  </div>
+</header>
 
-    <!-- BACK TO TOP -->
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">↑</button>
+<!-- ОСНОВНОЙ МАКЕТ -->
+<div class="layout">
+  <!-- Боковое меню (ПК) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="nav-item active" data-view="home" onclick="navigate('home')">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> Главная
+    </div>
+    <div class="nav-item" data-view="games" onclick="navigate('games')">
+      <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 9 18.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg> Игры
+    </div>
+    <div class="nav-item" data-view="apps" onclick="navigate('apps')">
+      <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg> Приложения
+    </div>
+    <div class="nav-item" data-view="profile" onclick="navigate('profile')">
+      <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Профиль
+    </div>
+  </aside>
 
-    <script>
-        (function() {
-            // ============ STATE ============
-            let currentLang = 'ru';
-            let currentTheme = 'light';
-            let currentBanner = 0;
-            let bannerInterval;
-            let cart = [];
-            let currentCategory = 'all';
-            let mobileMenuOpen = false;
+  <!-- Контент -->
+  <main class="main-content" id="app-content">
+    <!-- Здесь рендерится JS -->
+  </main>
+</div>
 
-            // ============ TRANSLATIONS ============
-            const i18n = {
-                ru: {
-                    slogan: 'SMART ELECTRONICS',
-                    nav_home: 'Главная',
-                    nav_categories: 'Категории',
-                    nav_about: 'О нас',
-                    nav_reviews: 'Отзывы',
-                    nav_contacts: 'Контакты',
-                    search_placeholder: 'Поиск товаров...',
-                    banner_tag_1: 'Новинка 2026',
-                    banner_title_1: 'Флагманские смартфоны',
-                    banner_desc_1: 'Мощные процессоры, яркие дисплеи и профессиональные камеры',
-                    banner_tag_2: 'Хит продаж',
-                    banner_title_2: 'Беспроводные наушники',
-                    banner_desc_2: 'Чистый звук, активное шумоподавление и 40 часов работы',
-                    banner_tag_3: 'Аксессуары',
-                    banner_title_3: 'Зарядки и гаджеты',
-                    banner_desc_3: 'Быстрая зарядка, кабели, флешки и умные часы',
-                    buy_now: 'Купить сейчас',
-                    categories_title: 'Категории',
-                    cat_all: 'Все товары',
-                    cat_phones: '📱 Смартфоны',
-                    cat_headphones: '🎧 Наушники',
-                    cat_chargers: '🔌 Зарядники',
-                    cat_flash: '💾 Флешки',
-                    cat_watches: '⌚ Smart Watch',
-                    cat_speakers: '🔊 Колонки',
-                    cat_accessories: '🎮 Аксессуары',
-                    products_title: 'Все товары',
-                    add_to_cart: 'В корзину',
-                    buy_btn: 'Купить',
-                    rating_text: 'отзывов',
-                    about_title: 'О нас',
-                    about_1_title: 'Кто мы',
-                    about_1_desc: 'LOIK STORE — современный магазин электроники с фокусом на качество и сервис',
-                    about_2_title: 'Доставка',
-                    about_2_desc: 'Быстрая доставка по всей стране. Отправка в день заказа',
-                    about_3_title: 'Гарантия',
-                    about_3_desc: 'Официальная гарантия на все товары. Возврат в течение 30 дней',
-                    about_4_title: 'Сервис',
-                    about_4_desc: 'Поддержка 24/7. Поможем с выбором и настройкой устройств',
-                    reviews_title: 'Отзывы клиентов',
-                    contacts_title: 'Контакты',
-                    contact_phone: 'Телефон',
-                    contact_email: 'Email',
-                    contact_address: 'Адрес',
-                    contact_address_text: 'Душанбе, ул. Рудаки 123',
-                    contact_hours: 'Часы работы',
-                    footer_shop: 'Магазин',
-                    footer_new: 'Новинки',
-                    footer_sale: 'Акции',
-                    footer_help: 'Помощь',
-                    footer_warranty: 'Гарантия',
-                    footer_delivery: 'Доставка',
-                    footer_social: 'Соцсети',
-                    footer_rights: 'Все права защищены.',
-                    cart_title: '🛒 Корзина',
-                    cart_empty: 'Корзина пуста',
-                    cart_total: 'Итого:',
-                    checkout: 'Оформить заказ',
-                    toast_added: 'добавлен в корзину!',
-                    toast_removed: 'удалён из корзины',
-                },
-                tj: {
-                    slogan: 'SMART ELECTRONICS',
-                    nav_home: 'Саҳифаи асосӣ',
-                    nav_categories: 'Категорияҳо',
-                    nav_about: 'Дар бораи мо',
-                    nav_reviews: 'Тақризҳо',
-                    nav_contacts: 'Тамос',
-                    search_placeholder: 'Ҷустуҷӯи мол...',
-                    banner_tag_1: 'Нав 2026',
-                    banner_title_1: 'Смартфонҳои флагманӣ',
-                    banner_desc_1: 'Протсессорҳои пурқувват, дисплейҳои равшан ва камераҳои касбӣ',
-                    banner_tag_2: 'Бестселлер',
-                    banner_title_2: 'Гӯшмонакҳои бесим',
-                    banner_desc_2: 'Садои тоза, пасткунии садои фаъол ва 40 соат кор',
-                    banner_tag_3: 'Аксессуарҳо',
-                    banner_title_3: 'Пуркунакҳо ва гаҷетҳо',
-                    banner_desc_3: 'Пуркунии зуд, симҳо, флешкаҳо ва соатҳои зирак',
-                    buy_now: 'Ҳозир харед',
-                    categories_title: 'Категорияҳо',
-                    cat_all: 'Ҳамаи молҳо',
-                    cat_phones: '📱 Смартфонҳо',
-                    cat_headphones: '🎧 Гӯшмонакҳо',
-                    cat_chargers: '🔌 Пуркунакҳо',
-                    cat_flash: '💾 Флешкаҳо',
-                    cat_watches: '⌚ Соатҳои зирак',
-                    cat_speakers: '🔊 Баландгӯякҳо',
-                    cat_accessories: '🎮 Аксессуарҳо',
-                    products_title: 'Ҳамаи молҳо',
-                    add_to_cart: 'Ба сабад',
-                    buy_btn: 'Харидан',
-                    rating_text: 'тақриз',
-                    about_title: 'Дар бораи мо',
-                    about_1_title: 'Мо кистем',
-                    about_1_desc: 'LOIK STORE — мағозаи муосири электроника бо таваҷҷӯҳ ба сифат ва хизматрасонӣ',
-                    about_2_title: 'Расондан',
-                    about_2_desc: 'Расонидани зуд дар саросари кишвар. Ирсол дар рӯзи фармоиш',
-                    about_3_title: 'Кафолат',
-                    about_3_desc: 'Кафолати расмӣ барои ҳамаи молҳо. Баргардонидан дар давоми 30 рӯз',
-                    about_4_title: 'Хизматрасонӣ',
-                    about_4_desc: 'Дастгирии 24/7. Дар интихоб ва танзими дастгоҳҳо кӯмак мекунем',
-                    reviews_title: 'Тақризҳои муштариён',
-                    contacts_title: 'Тамос',
-                    contact_phone: 'Телефон',
-                    contact_email: 'Email',
-                    contact_address: 'Суроға',
-                    contact_address_text: 'Душанбе, кӯч. Рӯдакӣ 123',
-                    contact_hours: 'Соатҳои корӣ',
-                    footer_shop: 'Мағоза',
-                    footer_new: 'Навҳо',
-                    footer_sale: 'Аксияҳо',
-                    footer_help: 'Кӯмак',
-                    footer_warranty: 'Кафолат',
-                    footer_delivery: 'Расондан',
-                    footer_social: 'Шабакаҳо',
-                    footer_rights: 'Ҳамаи ҳуқуқҳо ҳифз шудаанд.',
-                    cart_title: '🛒 Сабад',
-                    cart_empty: 'Сабад холӣ аст',
-                    cart_total: 'Ҳамагӣ:',
-                    checkout: 'Фармоиш додан',
-                    toast_added: 'ба сабад илова шуд!',
-                    toast_removed: 'аз сабад хориҷ шуд',
-                }
-            };
+<!-- НИЖНЯЯ ПАНЕЛЬ (МОБИЛКИ) -->
+<nav class="bottom-nav">
+  <div class="bottom-nav-item active" data-view="home" onclick="navigate('home')">
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> Главная
+  </div>
+  <div class="bottom-nav-item" data-view="games" onclick="navigate('games')">
+    <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 9 18.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg> Игры
+  </div>
+  <div class="bottom-nav-item" data-view="apps" onclick="navigate('apps')">
+    <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg> Приложения
+  </div>
+  <div class="bottom-nav-item" data-view="profile" onclick="navigate('profile')">
+    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Профиль
+  </div>
+</nav>
 
-            // ============ PRODUCT DATA ============
-            const allProducts = [
-                { id: 1, name: 'iPhone 16 Pro Max 256GB', category: 'smartphones', price: 89990, oldPrice: 104990,
-                    rating: 4.9, reviews: 384, emoji: '📱', badge: '-14%', color: '#1a1a2e' },
-                { id: 2, name: 'Samsung Galaxy S25 Ultra', category: 'smartphones', price: 79990, oldPrice: 94990,
-                    rating: 4.8, reviews: 291, emoji: '📱', badge: '-16%', color: '#0d1b2a' },
-                { id: 3, name: 'Xiaomi 15 Pro 512GB', category: 'smartphones', price: 54990, oldPrice: 64990,
-                    rating: 4.7, reviews: 203, emoji: '📱', badge: '-15%', color: '#1a1a1a' },
-                { id: 4, name: 'Google Pixel 10 Pro', category: 'smartphones', price: 69990, oldPrice: 79990, rating: 4.6,
-                    reviews: 156, emoji: '📱', badge: null, color: '#1c1c2e' },
-                { id: 5, name: 'AirPods Pro 3', category: 'headphones', price: 17990, oldPrice: 21990, rating: 4.9,
-                    reviews: 512, emoji: '🎧', badge: '-18%', color: '#0a0a0a' },
-                { id: 6, name: 'Samsung Galaxy Buds3 Pro', category: 'headphones', price: 12990, oldPrice: 15990,
-                    rating: 4.7, reviews: 278, emoji: '🎧', badge: '-19%', color: '#111122' },
-                { id: 7, name: 'Sony WH-1000XM6', category: 'headphones', price: 24990, oldPrice: 29990, rating: 4.8,
-                    reviews: 345, emoji: '🎧', badge: '-17%', color: '#0d0d1a' },
-                { id: 8, name: 'JBL Tour Pro 3', category: 'headphones', price: 15990, oldPrice: 18990, rating: 4.6,
-                    reviews: 189, emoji: '🎧', badge: null, color: '#121220' },
-                { id: 9, name: 'Anker GaN 100W зарядка', category: 'chargers', price: 3490, oldPrice: 4990, rating: 4.8,
-                    reviews: 678, emoji: '🔌', badge: '-30%', color: '#e8f0fe' },
-                { id: 10, name: 'Apple MagSafe Charger', category: 'chargers', price: 3990, oldPrice: 5490, rating: 4.7,
-                    reviews: 423, emoji: '🔌', badge: '-27%', color: '#f5f5f7' },
-                { id: 11, name: 'Беспроводная зарядка Baseus', category: 'chargers', price: 2490, oldPrice: 3490,
-                    rating: 4.6, reviews: 312, emoji: '🔌', badge: null, color: '#fafafa' },
-                { id: 12, name: 'Кабель USB-C 2м плетёный', category: 'chargers', price: 890, oldPrice: 1490, rating: 4.5,
-                    reviews: 567, emoji: '🔌', badge: '-40%', color: '#fff5f5' },
-                { id: 13, name: 'SanDisk Ultra 256GB USB-C', category: 'flashdrives', price: 2490, oldPrice: 3490,
-                    rating: 4.7, reviews: 234, emoji: '💾', badge: '-29%', color: '#f0f4ff' },
-                { id: 14, name: 'Samsung USB 3.2 128GB', category: 'flashdrives', price: 1790, oldPrice: 2490, rating: 4.6,
-                    reviews: 198, emoji: '💾', badge: '-28%', color: '#f5f7ff' },
-                { id: 15, name: 'Kingston DataTraveler 64GB', category: 'flashdrives', price: 990, oldPrice: 1490,
-                    rating: 4.5, reviews: 345, emoji: '💾', badge: null, color: '#fafbff' },
-                { id: 16, name: 'Apple Watch Ultra 3', category: 'watches', price: 54990, oldPrice: 64990, rating: 4.9,
-                    reviews: 156, emoji: '⌚', badge: '-15%', color: '#0a0a14' },
-                { id: 17, name: 'Samsung Galaxy Watch7', category: 'watches', price: 24990, oldPrice: 29990, rating: 4.7,
-                    reviews: 203, emoji: '⌚', badge: null, color: '#111122' },
-                { id: 18, name: 'Xiaomi Watch S4', category: 'watches', price: 11990, oldPrice: 14990, rating: 4.6,
-                    reviews: 178, emoji: '⌚', badge: '-20%', color: '#1a1a24' },
-                { id: 19, name: 'JBL Flip 7', category: 'speakers', price: 8990, oldPrice: 11990, rating: 4.7,
-                    reviews: 289, emoji: '🔊', badge: '-25%', color: '#f8f8ff' },
-                { id: 20, name: 'Marshall Emberton III', category: 'speakers', price: 12990, oldPrice: 15990, rating: 4.8,
-                    reviews: 167, emoji: '🔊', badge: '-19%', color: '#1a1a1a' },
-                { id: 21, name: 'Чехол противоударный', category: 'accessories', price: 1490, oldPrice: 2490, rating: 4.5,
-                    reviews: 456, emoji: '🎮', badge: '-40%', color: '#fff8f0' },
-                { id: 22, name: 'Защитное стекло 3D', category: 'accessories', price: 590, oldPrice: 990, rating: 4.4,
-                    reviews: 523, emoji: '🎮', badge: null, color: '#fafeff' },
-                { id: 23, name: 'Power Bank 20000mAh', category: 'accessories', price: 3490, oldPrice: 4990, rating: 4.7,
-                    reviews: 634, emoji: '🎮', badge: '-30%', color: '#f5f5fa' },
-                { id: 24, name: 'Держатель для телефона', category: 'accessories', price: 790, oldPrice: 1290, rating: 4.3,
-                    reviews: 312, emoji: '🎮', badge: null, color: '#fafafc' },
-            ];
+<!-- МОДАЛЬНОЕ ОКНО ПРИЛОЖЕНИЯ -->
+<div class="modal-overlay" id="app-modal">
+  <div class="modal-content" id="modal-body">
+    <!-- Контент генерируется JS -->
+  </div>
+</div>
 
-            let shuffledProducts = [...allProducts];
+<script>
+/* ================= ДАННЫЕ (ВАШИ ПРИЛОЖЕНИЯ) ================= */
+const APPS = [
+  {
+    id: "loik-notes", name: "Loik Заметки", type: "app", cat: "Продуктивность",
+    dev: "Loik Dev", ver: "1.0", size: "12 МБ", os: "Android", rating: 4.8, downloads: "1 тыс.+",
+    emoji: "📝", color: "#5b3df5", icon: "", file: "apps/loik-notes.apk", shots: [],
+    desc: "Быстрые заметки с тегами и поиском.\nРаботает без интернета.\nЭто пример — замените его своим приложением."
+  },
+  {
+    id: "loik-runner", name: "Loik Runner", type: "game", cat: "Аркада",
+    dev: "Loik Games", ver: "0.9", size: "48 МБ", os: "Android, Windows", rating: 4.6, downloads: "500+",
+    emoji: "🏃", color: "#e8478b", icon: "", file: "apps/loik-runner.zip", shots: [],
+    desc: "Бегите как можно дальше и собирайте монеты.\nПростое управление в одно касание.\nЭто пример — замените его своей игрой."
+  },
+  {
+    id: "loik-calc", name: "Loik Калькулятор", type: "app", cat: "Инструменты",
+    dev: "Loik Dev", ver: "2.1", size: "6 МБ", os: "Windows", rating: 4.9, downloads: "2 тыс.+",
+    emoji: "🧮", color: "#0f9d8a", icon: "", file: "apps/loik-calc.exe", shots: [],
+    desc: "Обычный и инженерный режимы, вычисления.\nЭто пример — замените его своим приложением."
+  },
+  {
+    id: "demo-game", name: "Космический Шутер", type: "game", cat: "Экшен",
+    dev: "SpaceStudio", ver: "1.2", size: "85 МБ", os: "Android", rating: 4.2, downloads: "10 тыс.+",
+    emoji: "🚀", color: "#e8833a", icon: "", file: "apps/space.apk", shots: [],
+    desc: "Летите сквозь астероиды и уничтожайте врагов. Пример игры для витрины."
+  }
+];
 
-            function shuffleArray(arr) {
-                const a = [...arr];
-                for (let i = a.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [a[i], a[j]] = [a[j], a[i]];
-                }
-                return a;
-            }
-            shuffledProducts = shuffleArray(allProducts);
+/* ================= ПЕРЕВОДЫ ================= */
+const TRANSLATIONS = {
+  ru: {
+    home: "Главная", games: "Игры", apps: "Приложения", profile: "Профиль", settings: "Настройки",
+    recommended: "Рекомендуем", all_apps: "Все приложения", all_games: "Все игры",
+    search: "Поиск приложений и игр...", install: "Установить", open: "Открыть",
+    rating: "Рейтинг", downloads: "Скачиваний", size: "Размер", version: "Версия",
+    about: "Об этом приложении", theme: "Тема оформления", lang: "Язык интерфейса",
+    system: "Системная", light: "Светлая", dark: "Тёмная", save: "Сохранить",
+    profile_title: "Мой профиль", dev_name: "Разработчик Loik", dev_email: "dev@loik.store",
+    my_apps: "Мои приложения", settings_title: "Настройки",
+    settings_theme_desc: "Настройте внешний вид магазина", settings_lang_desc: "Выберите язык интерфейса",
+    theme_saved: "Тема изменена", lang_saved: "Язык изменен"
+  },
+  en: {
+    home: "Home", games: "Games", apps: "Apps", profile: "Profile", settings: "Settings",
+    recommended: "Recommended", all_apps: "All apps", all_games: "All games",
+    search: "Search apps and games...", install: "Install", open: "Open",
+    rating: "Rating", downloads: "Downloads", size: "Size", version: "Version",
+    about: "About this app", theme: "Theme", lang: "Language",
+    system: "System", light: "Light", dark: "Dark", save: "Save",
+    profile_title: "My Profile", dev_name: "Loik Developer", dev_email: "dev@loik.store",
+    my_apps: "My apps", settings_title: "Settings",
+    settings_theme_desc: "Customize store appearance", settings_lang_desc: "Choose interface language",
+    theme_saved: "Theme changed", lang_saved: "Language changed"
+  }
+};
 
-            // ============ REVIEWS DATA ============
-            const reviewsData = [
-                { name: 'Алексей М.', text: 'Отличный магазин! Купил iPhone — всё оригинальное, доставили за 2 дня.',
-                    stars: 5, avatar: 'А' },
-                { name: 'Марина К.', text: 'Заказывала наушники Sony. Качество звука потрясающее, цена ниже чем везде.',
-                    stars: 5, avatar: 'М' },
-                { name: 'Джамшед Р.',
-                    text: 'Мағозаи хеле хуб! Флешкаро фармоиш додам, зуд расонданд. Сифати аъло!', stars: 5,
-                    avatar: 'Ҷ' },
-                { name: 'Ольга С.', text: 'Покупаю тут технику уже третий раз. Всегда отличный сервис и быстрая доставка.',
-                    stars: 4, avatar: 'О' },
-                { name: 'Рустам А.', text: 'Купил зарядку Anker — работает отлично. Рекомендую магазин!', stars: 5,
-                    avatar: 'Р' },
-                { name: 'Елена В.', text: 'Заказала смарт-часы. Пришли быстро, упаковано отлично. Спасибо!', stars: 5,
-                    avatar: 'Е' },
-            ];
+/* ================= СОСТОЯНИЕ И ЛОГИКА ================= */
+let currentLang = localStorage.getItem('loik_lang') || 'ru';
+let currentTheme = localStorage.getItem('loik_theme') || 'system';
+let currentView = 'home';
+let searchQuery = '';
 
-            // ============ DOM REFS ============
-            const $ = (sel) => document.querySelector(sel);
-            const $$ = (sel) => document.querySelectorAll(sel);
+const t = (key) => TRANSLATIONS[currentLang][key] || key;
 
-            const productsGrid = $('#productsGrid');
-            const cartBadge = $('#cartBadge');
-            const cartSidebar = $('#cartSidebar');
-            const cartOverlay = $('#cartOverlay');
-            const cartItems = $('#cartItems');
-            const cartFooter = $('#cartFooter');
-            const cartTotal = $('#cartTotal');
-            const backToTop = $('#backToTop');
-            const toastContainer = $('#toastContainer');
-            const searchInput = $('#searchInput');
-            const mobileNav = $('#mobileNav');
-            const productsTitle = $('#productsTitle');
-            const langBtn = $('#langBtn');
+// Инициализация темы
+function initTheme() {
+  document.body.setAttribute('data-theme', currentTheme);
+}
 
-            // ============ FUNCTIONS ============
-            function t(key) {
-                return i18n[currentLang][key] || key;
-            }
+// Инициализация навигации и роутинга
+function navigate(view) {
+  currentView = view;
+  searchQuery = '';
+  document.getElementById('q').value = '';
+  
+  // Обновляем активные кнопки
+  document.querySelectorAll('.nav-item, .bottom-nav-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.view === view);
+  });
 
-            function updateAllTexts() {
-                document.querySelectorAll('[data-i18n]').forEach(el => {
-                    const key = el.getAttribute('data-i18n');
-                    if (el.tagName === 'INPUT' && el.hasAttribute('data-i18n-placeholder')) {
-                        el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
-                    } else if (el.tagName === 'INPUT') {
-                        // skip
-                    } else {
-                        el.textContent = t(key);
-                    }
-                });
-                // Update placeholder
-                const si = $('#searchInput');
-                if (si) si.placeholder = t('search_placeholder');
-                // Update products title
-                if (productsTitle) {
-                    if (currentCategory === 'all') productsTitle.textContent = t('products_title');
-                    else {
-                        const catMap = {
-                            smartphones: t('cat_phones'),
-                            headphones: t('cat_headphones'),
-                            chargers: t('cat_chargers'),
-                            flashdrives: t('cat_flash'),
-                            watches: t('cat_watches'),
-                            speakers: t('cat_speakers'),
-                            accessories: t('cat_accessories'),
-                        };
-                        productsTitle.textContent = catMap[currentCategory] || t('products_title');
-                    }
-                }
-                langBtn.textContent = currentLang === 'ru' ? '🇹🇯' : '🇷🇺';
-                document.documentElement.lang = currentLang === 'ru' ? 'ru' : 'tg';
-            }
+  renderView();
+  window.scrollTo(0, 0);
+}
 
-            function toggleLanguage() {
-                currentLang = currentLang === 'ru' ? 'tj' : 'ru';
-                updateAllTexts();
-                renderProducts();
-                renderReviews();
-                showToast(currentLang === 'ru' ?
-                    'Язык: Русский 🇷🇺' : 'Забон: Тоҷикӣ 🇹🇯');
-            }
+// Рендер контента в зависимости от вкладки
+function renderView() {
+  const container = document.getElementById('app-content');
+  
+  // Обновляем плейсхолдер поиска
+  document.getElementById('q').placeholder = t('search');
 
-            function toggleTheme() {
-                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', currentTheme);
-                localStorage.setItem('loik-theme', currentTheme);
-                showToast(currentTheme === 'dark' ? '🌙 Тёмная тема' : '☀️ Светлая тема');
-            }
+  if (currentView === 'home') {
+    container.innerHTML = renderHome();
+  } else if (currentView === 'games') {
+    container.innerHTML = renderCategory('game', t('all_games'));
+  } else if (currentView === 'apps') {
+    container.innerHTML = renderCategory('app', t('all_apps'));
+  } else if (currentView === 'profile') {
+    container.innerHTML = renderProfile();
+  } else if (currentView === 'settings') {
+    container.innerHTML = renderSettings();
+  }
+}
 
-            function showToast(message) {
-                const toast = document.createElement('div');
-                toast.className = 'toast';
-                toast.textContent = message;
-                toastContainer.appendChild(toast);
-                setTimeout(() => toast.remove(), 3000);
-            }
+// ================= РЕНДЕР КОМПОНЕНТОВ =================
 
-            function addToCart(product) {
-                cart.push(product);
-                updateCartUI();
-                showToast(`✅ ${product.name} — ${t('toast_added')}`);
-                // Animate badge
-                cartBadge.style.transform = 'scale(1.4)';
-                setTimeout(() => cartBadge.style.transform = 'scale(1)', 200);
-            }
+// Главная страница (с горизонтальным скроллом и списком)
+function renderHome() {
+  const featured = APPS.slice(0, 3); // Первые 3 как "Рекомендуемые"
+  const allApps = APPS;
 
-            function removeFromCart(index) {
-                const removed = cart[index];
-                cart.splice(index, 1);
-                updateCartUI();
-                if (removed) showToast(`🗑️ ${removed.name} — ${t('toast_removed')}`);
-            }
+  return `
+    <h1 class="page-title">${t('recommended')}</h1>
+    <div class="h-scroll-row">
+      ${featured.map(a => `
+        <div class="h-card" onclick="openAppModal('${a.id}')">
+          <div class="app-icon" style="background:${a.color || '#5b3df5'}">${a.emoji}</div>
+          <div class="app-title">${a.name}</div>
+        </div>
+      `).join('')}
+    </div>
 
-            function updateCartUI() {
-                const count = cart.length;
-                cartBadge.textContent = count;
-                cartBadge.style.display = count > 0 ? 'flex' : 'none';
-                renderCartItems();
-            }
+    <h2 class="page-title" style="margin-top:32px">${t('all_apps')} и ${t('games')}</h2>
+    <div class="grid">
+      ${allApps.map(a => renderAppCard(a)).join('')}
+    </div>
+  `;
+}
 
-            function renderCartItems() {
-                if (cart.length === 0) {
-                    cartItems.innerHTML =
-                        '<div class="cart-empty">🛒</div><p style="text-align:center;color:var(--text-tertiary)">' + t(
-                            'cart_empty') + '</p>';
-                    cartFooter.style.display = 'none';
-                } else {
-                    cartItems.innerHTML = cart.map((item, i) => `
-                <div class="cart-item">
-                  <div class="cart-item-img">${item.emoji}</div>
-                  <div class="cart-item-info">
-                    <div class="cart-item-title">${item.name}</div>
-                    <div class="cart-item-price">${item.price.toLocaleString()} ₽</div>
-                  </div>
-                  <button class="cart-item-remove" onclick="window._removeCart(${i})">✕</button>
-                </div>
-              `).join('');
-                    cartFooter.style.display = 'block';
-                    const total = cart.reduce((sum, item) => sum + item.price, 0);
-                    cartTotal.textContent = total.toLocaleString() + ' ₽';
-                }
-            }
-            window._removeCart = removeFromCart;
+// Страница категории (Игры или Приложения)
+function renderCategory(type, title) {
+  const filtered = APPS.filter(a => a.type === type);
+  return `
+    <h1 class="page-title">${title}</h1>
+    <div class="grid">
+      ${filtered.length ? filtered.map(a => renderAppCard(a)).join('') : '<p>Пусто</p>'}
+    </div>
+  `;
+}
 
-            function toggleCart() {
-                const isOpen = cartSidebar.classList.contains('open');
-                if (isOpen) {
-                    cartSidebar.classList.remove('open');
-                    cartOverlay.classList.remove('open');
-                    document.body.style.overflow = '';
-                } else {
-                    cartSidebar.classList.add('open');
-                    cartOverlay.classList.add('open');
-                    document.body.style.overflow = 'hidden';
-                }
-            }
+// Карточка приложения в списке
+function renderAppCard(a) {
+  // Звездочки рейтинга
+  const stars = `<div class="app-rating">
+    <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+    ${a.rating || '4.0'}
+  </div>`;
 
-            function checkout() {
-                if (cart.length === 0) return;
-                showToast('🎉 ' + (currentLang === 'ru' ? 'Заказ оформлен! Спасибо!' : 'Фармоиш қабул шуд! Ташаккур!'));
-                cart = [];
-                updateCartUI();
-                setTimeout(toggleCart, 500);
-            }
+  return `
+    <div class="app-card" onclick="openAppModal('${a.id}')">
+      <div class="app-icon" style="background:${a.color || '#5b3df5'}">${a.icon ? `<img src="${a.icon}">` : a.emoji}</div>
+      <div class="app-info">
+        <div class="app-title">${a.name}</div>
+        <div class="app-dev">${a.dev}</div>
+        <div class="app-meta">
+          ${stars}
+          <span>•</span>
+          <span>${a.size}</span>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="display:none" onclick="event.stopPropagation(); alert('Скачивание...')">${t('install')}</button>
+    </div>
+  `;
+}
 
-            function renderProductCard(product, index) {
-                const discountPercent = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) *
-                    100) : null;
-                const starsHTML = Array.from({ length: 5 }, (_, i) =>
-                    i < Math.round(product.rating) ? '⭐' : '☆'
-                ).join('');
-                return `
-              <div class="product-card visible" style="animation-delay:${index * 0.04}s" data-category="${product.category}" data-name="${product.name.toLowerCase()}" data-id="${product.id}">
-                <div class="product-img" style="background:${product.color}20;">
-                  ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
-                  <span style="font-size:3.5rem;z-index:1;">${product.emoji}</span>
-                </div>
-                <div class="product-title">${product.name}</div>
-                <div class="product-rating">${starsHTML} <span>${product.rating} · ${product.reviews} ${t('rating_text')}</span></div>
-                <div class="product-price-row">
-                  <span class="product-price">${product.price.toLocaleString()} ₽</span>
-                  ${product.oldPrice ? `<span class="product-old-price">${product.oldPrice.toLocaleString()} ₽</span>` : ''}
-                  ${discountPercent ? `<span class="product-discount">-${discountPercent}%</span>` : ''}
-                </div>
-                <div class="product-actions">
-                  <button class="btn btn-outline" onclick="event.stopPropagation();window._addToCartById(${product.id})" title="${t('add_to_cart')}">🛒</button>
-                  <button class="btn btn-primary" onclick="event.stopPropagation();window._buyNow(${product.id})">${t('buy_btn')}</button>
-                </div>
-              </div>
-            `;
-            }
+// Модальное окно приложения
+function openAppModal(id) {
+  const a = APPS.find(x => x.id === id);
+  if (!a) return;
 
-            function renderProducts(filteredProducts = null) {
-                const products = filteredProducts || getFilteredProducts();
-                if (products.length === 0) {
-                    productsGrid.innerHTML = `
-                <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-tertiary);">
-                  <div style="font-size:3rem;">🔍</div>
-                  <p style="font-size:1rem;">${currentLang === 'ru' ? 'Ничего не найдено' : 'Ҳеҷ чиз ёфт нашуд'}</p>
-                </div>`;
-                } else {
-                    productsGrid.innerHTML = products.map((p, i) => renderProductCard(p, i)).join('');
-                }
-                updateAllTexts();
-            }
+  const modal = document.getElementById('app-modal');
+  const body = document.getElementById('modal-body');
 
-            function getFilteredProducts() {
-                let products = currentCategory === 'all' ? [...shuffledProducts] : allProducts.filter(p => p
-                    .category === currentCategory);
-                const query = searchInput.value.toLowerCase().trim();
-                if (query) {
-                    products = products.filter(p => p.name.toLowerCase().includes(query));
-                }
-                return products;
-            }
+  body.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px">
+      <div class="modal-header">
+        <div class="app-icon" style="background:${a.color || '#5b3df5'}">${a.icon ? `<img src="${a.icon}">` : a.emoji}</div>
+        <div>
+          <h2>${a.name}</h2>
+          <p>${a.dev}</p>
+        </div>
+      </div>
+      <button class="icon-btn" onclick="closeModal()" style="font-size:24px;">✕</button>
+    </div>
 
-            function filterProducts() {
-                renderProducts();
-            }
+    <div class="modal-stats">
+      <div class="stat-item">
+        <b>${a.rating} ★</b>
+        <span>${t('rating')}</span>
+      </div>
+      <div class="stat-item">
+        <b>${a.downloads}</b>
+        <span>${t('downloads')}</span>
+      </div>
+      <div class="stat-item">
+        <b>${a.size}</b>
+        <span>${t('size')}</span>
+      </div>
+      <div class="stat-item">
+        <b>${a.ver}</b>
+        <span>${t('version')}</span>
+      </div>
+    </div>
 
-            function filterByCategory(category, btn) {
-                currentCategory = category;
-                document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
-                if (btn) btn.classList.add('active');
-                // Update title
-                if (category === 'all') {
-                    productsTitle.textContent = t('products_title');
-                } else {
-                    const catMap = {
-                        smartphones: t('cat_phones'),
-                        headphones: t('cat_headphones'),
-                        chargers: t('cat_chargers'),
-                        flashdrives: t('cat_flash'),
-                        watches: t('cat_watches'),
-                        speakers: t('cat_speakers'),
-                        accessories: t('cat_accessories'),
-                    };
-                    productsTitle.textContent = catMap[category] || t('products_title');
-                }
-                renderProducts();
-                // Scroll to products
-                document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+    <div style="display:flex; gap:12px; margin-bottom:24px;">
+      <a href="${a.file}" download class="btn btn-primary" style="flex:1" onclick="alert('Загрузка файла началась!')">${t('install')}</a>
+    </div>
 
-            window._addToCartById = function(id) {
-                const product = allProducts.find(p => p.id === id);
-                if (product) addToCart(product);
-            };
-            window._buyNow = function(id) {
-                const product = allProducts.find(p => p.id === id);
-                if (product) {
-                    addToCart(product);
-                    toggleCart();
-                }
-            };
+    <h3 style="margin-bottom:12px; font-size:18px">${t('about')}</h3>
+    <p style="color:var(--text-sec); font-size:14px; line-height:1.6; white-space:pre-line;">${a.desc}</p>
+  `;
 
-            // ============ BANNER SLIDER ============
-            function goToBanner(index) {
-                const slides = $$('.banner-slide');
-                const dots = $$('.banner-dot');
-                slides.forEach(s => s.classList.remove('active'));
-                dots.forEach(d => d.classList.remove('active'));
-                currentBanner = index;
-                if (slides[currentBanner]) slides[currentBanner].classList.add('active');
-                if (dots[currentBanner]) dots[currentBanner].classList.add('active');
-            }
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
-            function nextBanner() {
-                const total = $$('.banner-slide').length;
-                goToBanner((currentBanner + 1) % total);
-                resetBannerInterval();
-            }
+function closeModal() {
+  document.getElementById('app-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-            function prevBanner() {
-                const total = $$('.banner-slide').length;
-                goToBanner((currentBanner - 1 + total) % total);
-                resetBannerInterval();
-            }
+// Страница профиля
+function renderProfile() {
+  return `
+    <h1 class="page-title">${t('profile_title')}</h1>
+    
+    <div class="profile-header">
+      <div class="profile-avatar">L</div>
+      <div>
+        <div class="profile-name">${t('dev_name')}</div>
+        <div class="profile-email">${t('dev_email')}</div>
+      </div>
+    </div>
 
-            function resetBannerInterval() {
-                clearInterval(bannerInterval);
-                bannerInterval = setInterval(nextBanner, 10000);
-            }
+    <div class="settings-group">
+      <div class="settings-item">
+        <div>
+          <div class="settings-label">${t('my_apps')}</div>
+          <div class="settings-desc">${APPS.length} шт.</div>
+        </div>
+        <button class="btn btn-outline" onclick="navigate('apps')">Смотреть</button>
+      </div>
+    </div>
+  `;
+}
 
-            document.querySelectorAll('.banner-dot').forEach(dot => {
-                dot.addEventListener('click', function() {
-                    goToBanner(parseInt(this.getAttribute('data-index')));
-                    resetBannerInterval();
-                });
-            });
+// Страница настроек
+function renderSettings() {
+  return `
+    <h1 class="page-title">${t('settings_title')}</h1>
 
-            // ============ REVIEWS ============
-            function renderReviews() {
-                const slider = $('#reviewsSlider');
-                if (!slider) return;
-                slider.innerHTML = reviewsData.map(r => `
-              <div class="review-card">
-                <div class="review-header">
-                  <div class="review-avatar">${r.avatar}</div>
-                  <div>
-                    <div class="review-name">${r.name}</div>
-                    <div class="review-stars">${'⭐'.repeat(r.stars)}</div>
-                  </div>
-                </div>
-                <p class="review-text">"${r.text}"</p>
-              </div>
-            `).join('');
-            }
+    <!-- ТЕМА -->
+    <div class="settings-group">
+      <div class="settings-item" style="flex-direction:column; align-items:flex-start; gap:16px">
+        <div>
+          <div class="settings-label">${t('theme')}</div>
+          <div class="settings-desc">${t('settings_theme_desc')}</div>
+        </div>
+        <div class="theme-selector" style="width:100%">
+          <div class="theme-btn ${currentTheme === 'system' ? 'active' : ''}" onclick="setTheme('system')">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            <span>${t('system')}</span>
+          </div>
+          <div class="theme-btn ${currentTheme === 'light' ? 'active' : ''}" onclick="setTheme('light')">
+            <svg viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06z"/></svg>
+            <span>${t('light')}</span>
+          </div>
+          <div class="theme-btn ${currentTheme === 'dark' ? 'active' : ''}" onclick="setTheme('dark')">
+            <svg viewBox="0 0 24 24"><path d="M10 2c-1.82 0-3.53.5-5 1.35C7.99 5.08 10 8.3 10 12s-2.01 6.92-5 8.65C6.47 21.5 8.18 22 10 22c5.52 0 10-4.48 10-10S15.52 2 10 2z"/></svg>
+            <span>${t('dark')}</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-            // ============ MOBILE MENU ============
-            function toggleMobileMenu() {
-                mobileMenuOpen = !mobileMenuOpen;
-                if (mobileMenuOpen) {
-                    mobileNav.classList.add('open');
-                    mobileNav.style.display = 'flex';
-                } else {
-                    mobileNav.classList.remove('open');
-                    setTimeout(() => { if (!mobileMenuOpen) mobileNav.style.display = 'none'; }, 300);
-                }
-            }
+    <!-- ЯЗЫК -->
+    <div class="settings-group">
+      <div class="settings-item">
+        <div>
+          <div class="settings-label">${t('lang')}</div>
+          <div class="settings-desc">${t('settings_lang_desc')}</div>
+        </div>
+        <select id="lang-select" onchange="setLang(this.value)" style="padding:10px; border-radius:8px; border:1px solid var(--border); background:var(--bg); font-size:16px;">
+          <option value="ru" ${currentLang === 'ru' ? 'selected' : ''}>Русский</option>
+          <option value="en" ${currentLang === 'en' ? 'selected' : ''}>English</option>
+        </select>
+      </div>
+    </div>
 
-            function closeMobileMenu() {
-                mobileMenuOpen = false;
-                mobileNav.classList.remove('open');
-                setTimeout(() => { if (!mobileMenuOpen) mobileNav.style.display = 'none'; }, 300);
-            }
+    <!-- СКРЫТАЯ АДМИНКА (ДЛЯ ВАС) -->
+    <div id="admin">
+      <h2 style="font-size:18px; margin-bottom:8px">Добавить приложение (Админ)</h2>
+      <p style="font-size:13px; color:var(--text-sec); margin-bottom:16px">Заполните форму, нажмите "Создать код" и вставьте в массив APPS в index.html.</p>
+      <form id="f">
+        <label>Название<input name="name" required></label>
+        <label>Тип<select name="type"><option value="app">Приложение</option><option value="game">Игра</option></select></label>
+        <label>Категория<input name="cat" placeholder="Инструменты..."></label>
+        <label>Разработчик<input name="dev" value="Loik"></label>
+        <label>Версия<input name="ver" value="1.0"></label>
+        <label>Размер<input name="size" placeholder="25 МБ"></label>
+        <label>Платформа<input name="os" placeholder="Android, Windows"></label>
+        <label>Эмодзи<input name="emoji" value="📱"></label>
+        <label>Цвет<input type="color" name="color" value="#5b3df5"></label>
+        <label>Ссылка на иконку<input name="icon" placeholder="https://..."></label>
+        <label class="full">Ссылка на файл (APK/EXE)<input name="file" placeholder="apps/my-app.apk" required></label>
+        <label class="full">Скриншоты (через запятую)<input name="shots" placeholder="shots/1.png, shots/2.png"></label>
+        <label class="full">Описание<textarea name="desc" rows="3"></textarea></label>
+        <div class="full" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+          <button class="btn btn-primary" type="submit">Создать код</button>
+          <button class="btn btn-outline" type="button" id="prev">Показать</button>
+        </div>
+      </form>
+      <pre id="out" hidden style="background:var(--bg); padding:16px; border-radius:12px; margin-top:16px; overflow:auto; font-size:13px; border:1px solid var(--border);"></pre>
+    </div>
+  `;
 
-            // ============ SCROLL ============
-            function scrollToSection(id) {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-                closeMobileMenu();
-                // Update active nav
-                document.querySelectorAll('.nav a, .mobile-nav a').forEach(a => a.classList.remove('active'));
-                const navLinks = document.querySelectorAll('.nav a');
-                navLinks.forEach(a => {
-                    if (a.getAttribute('onclick') && a.getAttribute('onclick').includes(id)) {
-                        a.classList.add('active');
-                    }
-                });
-            }
+  // Инициализация логики админки
+  setTimeout(() => {
+    const f = document.getElementById('f');
+    if (f) {
+      f.addEventListener('submit', e => {
+        e.preventDefault();
+        const d = Object.fromEntries(new FormData(f));
+        const slug = d.name.toLowerCase().replace(/[^a-zа-я0-9]+/g, "-") || "app" + Date.now();
+        const obj = { id: slug, name: d.name, type: d.type, cat: d.cat, dev: d.dev, ver: d.ver, size: d.size, os: d.os, rating: 5.0, downloads: "0", emoji: d.emoji, color: d.color, icon: d.icon, file: d.file, shots: d.shots ? d.shots.split(",") : [], desc: d.desc };
+        const out = document.getElementById('out');
+        out.hidden = false;
+        out.textContent = JSON.stringify(obj, null, 2) + ",";
+      });
+      document.getElementById('prev').addEventListener('click', () => {
+        const d = Object.fromEntries(new FormData(f));
+        const slug = d.name.toLowerCase().replace(/[^a-zа-я0-9]+/g, "-") || "app" + Date.now();
+        APPS.push({ id: slug, name: d.name, type: d.type, cat: d.cat, dev: d.dev, ver: d.ver, size: d.size, os: d.os, rating: 5.0, downloads: "0", emoji: d.emoji, color: d.color, icon: d.icon, file: d.file, shots: [], desc: d.desc });
+        alert("Добавлено! Вернитесь на главную.");
+      });
+    }
+  }, 100);
+}
 
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                if (scrollY > 400) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
-            });
+// ================= ДЕЙСТВИЯ =================
 
-            // ============ INIT ============
-            function init() {
-                // Load theme
-                const savedTheme = localStorage.getItem('loik-theme');
-                if (savedTheme) {
-                    currentTheme = savedTheme;
-                    document.documentElement.setAttribute('data-theme', currentTheme);
-                }
-                // Render products
-                renderProducts();
-                // Render reviews
-                renderReviews();
-                // Update texts
-                updateAllTexts();
-                // Start banner
-                bannerInterval = setInterval(nextBanner, 10000);
-                // Cart UI
-                updateCartUI();
-                // Skeleton simulation - products already rendered
-                langBtn.textContent = currentLang === 'ru' ? '🇹🇯' : '🇷🇺';
-            }
+function setTheme(theme) {
+  currentTheme = theme;
+  localStorage.setItem('loik_theme', theme);
+  initTheme();
+  renderView(); // Перерисовываем, чтобы обновить активные кнопки
+  showToast(t('theme_saved'));
+}
 
-            // Expose functions to window
-            window.toggleTheme = toggleTheme;
-            window.toggleLanguage = toggleLanguage;
-            window.toggleCart = toggleCart;
-            window.toggleMobileMenu = toggleMobileMenu;
-            window.closeMobileMenu = closeMobileMenu;
-            window.scrollToSection = scrollToSection;
-            window.nextBanner = nextBanner;
-            window.prevBanner = prevBanner;
-            window.filterByCategory = filterByCategory;
-            window.filterProducts = filterProducts;
-            window.checkout = checkout;
-            window.addToCart = addToCart;
-            window._addToCartById = window._addToCartById;
-            window._buyNow = window._buyNow;
-            window._removeCart = removeFromCart;
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('loik_lang', lang);
+  renderView();
+  showToast(t('lang_saved'));
+}
 
-            init();
-            console.log('🚀 LOIK STORE — SMART ELECTRONICS ready!');
-            console.log('🌐 Languages: RU | TJ');
-            console.log('🎨 Themes: Light | Dark');
-        })();
-    </script>
+function showToast(msg) {
+  const div = document.createElement('div');
+  div.style.cssText = 'position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:12px 24px; border-radius:99px; z-index:999; font-size:14px; transition: opacity 0.3s;';
+  div.textContent = msg;
+  document.body.appendChild(div);
+  setTimeout(() => { div.style.opacity = '0'; setTimeout(() => div.remove(), 300); }, 2000);
+}
+
+// Поиск
+document.getElementById('q').addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase().trim();
+  if (!q) {
+    renderView();
+    return;
+  }
+  
+  const filtered = APPS.filter(a => 
+    a.name.toLowerCase().includes(q) || 
+    a.dev.toLowerCase().includes(q) || 
+    a.cat.toLowerCase().includes(q)
+  );
+
+  document.getElementById('app-content').innerHTML = `
+    <h1 class="page-title">Результаты поиска: "${q}"</h1>
+    <div class="grid">
+      ${filtered.length ? filtered.map(a => renderAppCard(a)).join('') : '<div style="text-align:center; padding:40px; color:var(--text-sec)">Ничего не найдено 😔</div>'}
+    </div>
+  `;
+});
+
+// Закрытие модалки по клику на фон
+document.getElementById('app-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'app-modal') closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// Проверка хэша для админки
+function checkAdmin() {
+  if (window.location.hash === '#admin') {
+    const adminEl = document.getElementById('admin');
+    if (adminEl) adminEl.classList.add('on');
+    else {
+      navigate('settings');
+      setTimeout(() => {
+        const el = document.getElementById('admin');
+        if (el) el.classList.add('on');
+      }, 100);
+    }
+  }
+}
+
+// ================= ЗАПУСК =================
+initTheme();
+navigate('home');
+checkAdmin();
+window.addEventListener('hashchange', checkAdmin);
+</script>
 </body>
 </html>
