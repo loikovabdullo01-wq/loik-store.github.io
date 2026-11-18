@@ -70,11 +70,11 @@ header { position: sticky; top: 0; z-index: 100; background: var(--surface); bor
 @media (min-width: 768px) { .main-content { padding: 24px 32px; padding-bottom: 40px; } }
 @media (min-width: 1200px) { .main-content { padding: 32px 48px; } }
 
-/* Нижняя панель */
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: var(--nav-bg); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); }
+/* Нижняя панель (как в Play Market) */
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: var(--nav-bg); border-top: none; box-shadow: 0 -1px 4px rgba(0,0,0,0.08); display: flex; justify-content: space-around; padding: 4px 0 calc(4px + env(safe-area-inset-bottom)); }
 @media (min-width: 768px) { .bottom-nav { display: none; } }
-.bottom-nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-sec); font-size: 12px; font-weight: 500; cursor: pointer; padding: 8px 16px; border-radius: 8px; transition: .2s; }
-.bottom-nav-item svg { width: 24px; height: 24px; fill: currentColor; }
+.bottom-nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--text-sec); font-size: 11px; font-weight: 500; cursor: pointer; padding: 8px 12px; border-radius: 0; transition: .2s; }
+.bottom-nav-item svg { width: 22px; height: 22px; fill: currentColor; }
 .bottom-nav-item.active { color: var(--nav-text-active); }
 .bottom-nav-item.active svg { fill: var(--nav-text-active); }
 
@@ -82,38 +82,44 @@ header { position: sticky; top: 0; z-index: 100; background: var(--surface); bor
 .page-title { font-size: 20px; font-weight: 500; margin-bottom: 16px; }
 @media (min-width: 768px) { .page-title { font-size: 24px; margin-bottom: 24px; } }
 
-/* Сетка (Grid): на телефоне - плитка, на ПК - широкий список */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 16px; }
+/* Сетка на телефоне - 3 колонки как в плей маркете */
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 @media (min-width: 768px) { .grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; } }
 
-.app-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; cursor: pointer; transition: transform .1s; }
+.app-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; cursor: pointer; transition: transform .1s; }
 @media (min-width: 768px) { .app-card { flex-direction: row; align-items: center; text-align: left; gap: 16px; } }
 
 .app-card:hover .app-icon { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-.app-icon { width: 72px; height: 72px; border-radius: 18px; flex-shrink: 0; display: grid; place-items: center; font-size: 32px; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; transition: .2s; }
+
+/* Значки стали меньше */
+.app-icon { width: 64px; height: 64px; border-radius: 16px; flex-shrink: 0; display: grid; place-items: center; font-size: 28px; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; transition: .2s; }
 @media (min-width: 768px) { .app-icon { width: 80px; height: 80px; font-size: 40px; border-radius: 20px; } }
 .app-icon img { width: 100%; height: 100%; object-fit: cover; }
 
 .app-info { display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; }
 @media (min-width: 768px) { .app-info { align-items: flex-start; flex: 1; } }
 
-.app-title { font-size: 14px; font-weight: 500; margin-bottom: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-@media (min-width: 768px) { .app-title { font-size: 16px; margin-bottom: 4px; } }
+/* Название приложения - максимум 2 строки на телефоне */
+.app-title { font-size: 12px; font-weight: 400; margin-bottom: 0; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.2; height: 2.4em; overflow: hidden; text-align: center; width: 100%; }
+@media (min-width: 768px) { .app-title { font-size: 16px; font-weight: 500; white-space: nowrap; display: block; height: auto; text-align: left; margin-bottom: 4px; } }
 
-.app-dev { font-size: 12px; color: var(--text-sec); margin-bottom: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-@media (min-width: 768px) { .app-dev { font-size: 13px; margin-bottom: 6px; } }
+/* Скрываем имя разработчика на телефоне, чтобы не было каши */
+.app-dev { font-size: 12px; color: var(--text-sec); margin-bottom: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; display: none; }
+@media (min-width: 768px) { .app-dev { display: block; font-size: 13px; margin-bottom: 6px; } }
 
-.app-meta { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; color: var(--text-sec); margin-top: 4px; }
-@media (min-width: 768px) { .app-meta { justify-content: flex-start; font-size: 12px; margin-top: 0; } }
+.app-meta { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: var(--text-sec); margin-top: 2px; }
+@media (min-width: 768px) { .app-meta { justify-content: flex-start; font-size: 12px; gap: 8px; margin-top: 0; } }
 .app-rating { display: flex; align-items: center; gap: 2px; }
-.app-rating svg { width: 12px; height: 12px; fill: var(--text-main); }
+.app-rating svg { width: 10px; height: 10px; fill: var(--text-main); }
+@media (min-width: 768px) { .app-rating svg { width: 12px; height: 12px; } }
 
-.h-scroll-row { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 16px; scrollbar-width: none; margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
-@media (min-width: 768px) { .h-scroll-row { margin: 0; padding-left: 0; padding-right: 0; } }
+/* Рекомендуем - тоже уменьшили */
+.h-scroll-row { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 16px; scrollbar-width: none; margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
+@media (min-width: 768px) { .h-scroll-row { margin: 0; padding-left: 0; padding-right: 0; gap: 16px; } }
 .h-scroll-row::-webkit-scrollbar { display: none; }
-.h-card { flex: 0 0 140px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
-.h-card .app-icon { width: 100%; height: 140px; border-radius: 16px; font-size: 64px; }
-.h-card .app-title { font-size: 14px; text-align: center; margin: 0; }
+.h-card { flex: 0 0 100px; display: flex; flex-direction: column; gap: 6px; cursor: pointer; }
+.h-card .app-icon { width: 100%; height: 100px; border-radius: 16px; font-size: 48px; }
+.h-card .app-title { font-size: 12px; font-weight: 400; text-align: center; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; height: auto; }
 
 /* Кнопки */
 .btn { display: inline-flex; align-items: center; justify-content: center; padding: 8px 24px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; transition: .2s; }
@@ -128,9 +134,10 @@ header { position: sticky; top: 0; z-index: 100; background: var(--surface); bor
 @media (min-width: 768px) { .modal-overlay { align-items: center; padding: 24px; } .modal-content { max-width: 800px; border-radius: 24px; padding: 32px; } }
 @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 .modal-header { display: flex; gap: 16px; align-items: center; margin-bottom: 24px; }
-.modal-header .app-icon { width: 80px; height: 80px; font-size: 40px; }
+.modal-header .app-icon { width: 72px; height: 72px; font-size: 32px; }
 @media (min-width: 768px) { .modal-header .app-icon { width: 96px; height: 96px; } }
-.modal-header h2 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+.modal-header h2 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+@media (min-width: 768px) { .modal-header h2 { font-size: 24px; } }
 .modal-header p { color: var(--primary); font-weight: 500; font-size: 14px; }
 .modal-stats { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 16px 0; margin-bottom: 24px; }
 .stat-item { text-align: center; flex: 1; border-right: 1px solid var(--border); }
@@ -316,7 +323,6 @@ function renderHome() {
     <div class="h-scroll-row">
       ${featured.map(a => `
         <div class="h-card" onclick="openAppModal('${a.id}')">
-          <!-- ТУТ ИСПРАВЛЕНО: Теперь картинка вместо самолетика -->
           <div class="app-icon" style="background:${a.color || '#5b3df5'}">
             ${a.icon ? `<img src="${a.icon}" alt="${a.name}">` : a.emoji}
           </div>
