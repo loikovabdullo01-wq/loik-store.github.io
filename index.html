@@ -240,11 +240,11 @@ const APPS = [
     color: "#5b3df5",
     icon: "15.png",
     file: "geran-express.apk",
+    package: "com.loikov.geranexpress", // <--- ВАЖНО: Впиши сюда реальное имя пакета приложения (applicationId из build.gradle)
     shots: [],
     desc: "онлайн маркетплейс барои обявление."
-  }
-,
- {
+  },
+  {
     id: "Busston Market",
     name: "Busston Market",
     type: "app",
@@ -258,6 +258,7 @@ const APPS = [
     color: "#5b3df5",
     icon: "1.jpg",
     file: "busston-market.apk",
+    package: "com.loikov.busston", // <--- И здесь тоже
     shots: [],
     desc: "онлайн интернет магазин"
   }
@@ -388,10 +389,17 @@ function openAppModal(id, updateHash = true) {
   if (reviews.length > 0) avgRating = reviews.reduce((sum, r) => sum + r.stars, 0) / reviews.length;
   const ratingDisplay = avgRating > 0 ? avgRating.toFixed(1) : "0.0";
 
-  // Проверяем, "установлено" ли приложение (сохраняем статус в localStorage для красоты)
+  // Проверяем статус в памяти
   const isInstalled = localStorage.getItem(`loik_installed_${a.id}`) === 'true';
-  const btnClass = isInstalled ? 'btn-outline' : 'btn-primary';
-  const btnText = isInstalled ? t('open') : t('install');
+  
+  let btnHtml = '';
+  if (isInstalled) {
+    // Если установлено - показываем кнопку "Открыть"
+    btnHtml = `<button class="btn btn-outline" style="flex:1; font-size:16px; padding:12px;" onclick="handleOpen('${a.id}', '${a.package}')">${t('open')}</button>`;
+  } else {
+    // Если не установлено - кнопка "Установить"
+    btnHtml = `<button id="install-btn-${a.id}" class="btn btn-primary" style="flex:1; font-size:16px; padding:12px;" onclick="handleInstall('${a.id}', '${a.file}')">${t('install')}</button>`;
+  }
 
   body.innerHTML = `
     <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px">
@@ -410,12 +418,7 @@ function openAppModal(id, updateHash = true) {
     </div>
 
     <div style="display:flex; gap:12px; margin-bottom:24px;">
-      <!-- Кнопка установки -->
-      <button id="install-btn-${a.id}" class="btn ${btnClass}" style="flex:1; font-size:16px; padding:12px;" onclick="handleInstall('${a.id}', '${a.file}')">
-        ${btnText}
-      </button>
-      
-      <!-- Кнопка Поделиться -->
+      ${btnHtml}
       <button class="btn btn-outline" onclick="shareApp('${a.id}')" style="padding:12px;" title="${t('share')}">
         <svg style="width:22px;height:22px;fill:currentColor" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
       </button>
@@ -456,21 +459,13 @@ function openAppModal(id, updateHash = true) {
 // Логика "Установки"
 function handleInstall(appId, fileUrl) {
   const btn = document.getElementById(`install-btn-${appId}`);
-  
-  // Если уже установлено, просто имитируем открытие
-  if (localStorage.getItem(`loik_installed_${appId}`) === 'true') {
-    showToast("Приложение открывается...");
-    return;
-  }
-
-  // Меняем кнопку на "Загрузка..."
   btn.className = 'btn btn-primary';
   btn.innerHTML = `<span class="spinner"></span> ${t('loading')}`;
   btn.disabled = true;
 
-  // Имитируем задержку загрузки (1.5 сек)
+  // Имитируем задержку загрузки (чтобы было красиво)
   setTimeout(() => {
-    // Запускаем скачивание файла
+    // Запускаем скачивание
     const a = document.createElement('a');
     a.href = fileUrl;
     a.download = fileUrl.split('/').pop();
@@ -478,21 +473,42 @@ function handleInstall(appId, fileUrl) {
     a.click();
     document.body.removeChild(a);
 
+    // Сохраняем, что приложение "установлено"
+    localStorage.setItem(`loik_installed_${appId}`, 'true');
+    
     // Меняем кнопку на "Открыть"
+    const appData = APPS.find(x => x.id === appId);
     btn.className = 'btn btn-outline';
     btn.innerHTML = t('open');
     btn.disabled = false;
+    // Перепривязываем клик на открытие
+    btn.onclick = () => handleOpen(appId, appData.package);
 
-    // Сохраняем статус "установлено"
-    localStorage.setItem(`loik_installed_${appId}`, 'true');
-    
-    // Обновляем счетчик скачиваний
-    let stats = JSON.parse(localStorage.getItem('loik_stats') || '{}');
-    stats[appId] = (stats[appId] || 0) + 1;
-    localStorage.setItem('loik_stats', JSON.stringify(stats));
-
-    showToast("Загрузка завершена. Подтвердите установку в уведомлениях.");
+    showToast("Файл скачан. Проверьте уведомления, чтобы установить.");
   }, 1500);
+}
+
+// Логика "Открытия" приложения через Deep Link
+function handleOpen(appId, packageName) {
+  // Пытаемся открыть приложение через Intent (работает только в Chrome на Android)
+  // packageName - это уникальный ID твоего приложения (например: com.loikov.geranexpress)
+  
+  if (!packageName) {
+    showToast("Ошибка: не указан ID пакета приложения.");
+    return;
+  }
+
+  // Специальная ссылка, которая ищет установленное приложение
+  const intentUrl = `intent://#Intent;package=${packageName};scheme=https;end`;
+  
+  // Пробуем открыть
+  window.location.href = intentUrl;
+
+  // Если через 2 секунды ничего не произошло (приложение не установлено),
+  // показываем сообщение.
+  setTimeout(() => {
+    showToast("Если приложение не открылось, значит оно еще не установлено на телефоне.");
+  }, 2000);
 }
 
 function shareApp(id) {
@@ -576,7 +592,7 @@ function setLang(lang) {
 }
 function showToast(msg) {
   const div = document.createElement('div');
-  div.style.cssText = 'position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:12px 24px; border-radius:99px; z-index:999; font-size:14px; transition: opacity 0.3s; text-align:center;';
+  div.style.cssText = 'position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:12px 24px; border-radius:99px; z-index:999; font-size:14px; transition: opacity 0.3s; text-align:center; max-width:90%;';
   div.textContent = msg; document.body.appendChild(div);
   setTimeout(() => { div.style.opacity = '0'; setTimeout(() => div.remove(), 300); }, 3000);
 }
