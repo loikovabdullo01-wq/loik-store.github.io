@@ -81,20 +81,33 @@ header { position: sticky; top: 0; z-index: 100; background: var(--surface); bor
 /* ================= ЭЛЕМЕНТЫ КАТАЛОГА ================= */
 .page-title { font-size: 20px; font-weight: 500; margin-bottom: 16px; }
 @media (min-width: 768px) { .page-title { font-size: 24px; margin-bottom: 24px; } }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
-@media (min-width: 768px) { .grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; } }
-.app-card { display: flex; flex-direction: column; gap: 12px; cursor: pointer; transition: transform .1s; }
-@media (min-width: 768px) { .app-card { flex-direction: row; align-items: center; gap: 16px; } }
+
+/* Сетка (Grid): на телефоне - плитка, на ПК - широкий список */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 16px; }
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; } }
+
+.app-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; cursor: pointer; transition: transform .1s; }
+@media (min-width: 768px) { .app-card { flex-direction: row; align-items: center; text-align: left; gap: 16px; } }
+
 .app-card:hover .app-icon { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-.app-icon { width: 64px; height: 64px; border-radius: 16px; flex-shrink: 0; display: grid; place-items: center; font-size: 32px; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; transition: .2s; }
+.app-icon { width: 72px; height: 72px; border-radius: 18px; flex-shrink: 0; display: grid; place-items: center; font-size: 32px; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; transition: .2s; }
 @media (min-width: 768px) { .app-icon { width: 80px; height: 80px; font-size: 40px; border-radius: 20px; } }
 .app-icon img { width: 100%; height: 100%; object-fit: cover; }
-.app-info { flex: 1; min-width: 0; }
-.app-title { font-size: 16px; font-weight: 500; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.app-dev { font-size: 13px; color: var(--text-sec); margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.app-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-sec); }
+
+.app-info { display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; }
+@media (min-width: 768px) { .app-info { align-items: flex-start; flex: 1; } }
+
+.app-title { font-size: 14px; font-weight: 500; margin-bottom: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+@media (min-width: 768px) { .app-title { font-size: 16px; margin-bottom: 4px; } }
+
+.app-dev { font-size: 12px; color: var(--text-sec); margin-bottom: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+@media (min-width: 768px) { .app-dev { font-size: 13px; margin-bottom: 6px; } }
+
+.app-meta { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; color: var(--text-sec); margin-top: 4px; }
+@media (min-width: 768px) { .app-meta { justify-content: flex-start; font-size: 12px; margin-top: 0; } }
 .app-rating { display: flex; align-items: center; gap: 2px; }
 .app-rating svg { width: 12px; height: 12px; fill: var(--text-main); }
+
 .h-scroll-row { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 16px; scrollbar-width: none; margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
 @media (min-width: 768px) { .h-scroll-row { margin: 0; padding-left: 0; padding-right: 0; } }
 .h-scroll-row::-webkit-scrollbar { display: none; }
@@ -198,9 +211,7 @@ header { position: sticky; top: 0; z-index: 100; background: var(--surface); bor
 </div>
 
 <script>
-/* ================= ВАШИ ПРИЛОЖЕНИЯ =================
-   Вставляй сюда свои приложения в таком формате:
-*/
+/* ================= ВАШИ ПРИЛОЖЕНИЯ ================= */
 const APPS = [
   {
     id: "geran-express",
@@ -215,7 +226,7 @@ const APPS = [
     emoji: "🚀",
     color: "#5b3df5",
     icon: "15.png",
-    file: "geran-express.apk", // <--- ИСПРАВЛЕНО ЗДЕСЬ
+    file: "geran-express.apk",
     shots: [],
     desc: "онлайн маркетплейс барои обявление."
   }
@@ -233,7 +244,7 @@ const APPS = [
     emoji: "🚀",
     color: "#5b3df5",
     icon: "1.jpg",
-    file: "busston-market.apk", // <--- ИСПРАВЛЕНО ЗДЕСЬ
+    file: "busston-market.apk",
     shots: [],
     desc: "онлайн интернет магазин"
   }
@@ -305,7 +316,10 @@ function renderHome() {
     <div class="h-scroll-row">
       ${featured.map(a => `
         <div class="h-card" onclick="openAppModal('${a.id}')">
-          <div class="app-icon" style="background:${a.color || '#5b3df5'}">${a.emoji}</div>
+          <!-- ТУТ ИСПРАВЛЕНО: Теперь картинка вместо самолетика -->
+          <div class="app-icon" style="background:${a.color || '#5b3df5'}">
+            ${a.icon ? `<img src="${a.icon}" alt="${a.name}">` : a.emoji}
+          </div>
           <div class="app-title">${a.name}</div>
         </div>
       `).join('')}
@@ -333,7 +347,9 @@ function renderAppCard(a) {
 
   return `
     <div class="app-card" onclick="openAppModal('${a.id}')">
-      <div class="app-icon" style="background:${a.color || '#5b3df5'}">${a.icon ? `<img src="${a.icon}">` : a.emoji}</div>
+      <div class="app-icon" style="background:${a.color || '#5b3df5'}">
+        ${a.icon ? `<img src="${a.icon}" alt="${a.name}">` : a.emoji}
+      </div>
       <div class="app-info">
         <div class="app-title">${a.name}</div>
         <div class="app-dev">${a.dev}</div>
@@ -362,7 +378,7 @@ function openAppModal(id) {
   body.innerHTML = `
     <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px">
       <div class="modal-header">
-        <div class="app-icon" style="background:${a.color || '#5b3df5'}">${a.icon ? `<img src="${a.icon}">` : a.emoji}</div>
+        <div class="app-icon" style="background:${a.color || '#5b3df5'}">${a.icon ? `<img src="${a.icon}" alt="${a.name}">` : a.emoji}</div>
         <div><h2>${a.name}</h2><p>${a.dev}</p></div>
       </div>
       <button class="icon-btn" onclick="closeModal()" style="font-size:24px;">✕</button>
@@ -500,7 +516,7 @@ document.getElementById('q').addEventListener('input', (e) => {
   const filtered = APPS.filter(a => a.name.toLowerCase().includes(q) || a.dev.toLowerCase().includes(q));
   document.getElementById('app-content').innerHTML = `
     <h1 class="page-title">Результаты поиска: "${q}"</h1>
-    <div class="grid">${filtered.length ? filtered.map(a => renderAppCard(a)).join('') : '<div style="text-align:center; padding:40px; color:var(--text-sec)">Ничего не найдено 😔</div>'}</div>
+    <div class="grid">${filtered.length ? filtered.map(a => renderAppCard(a)).join('') : '<div style="text-align:center; padding:40px; color:var(--text-sec); grid-column: 1/-1;">Ничего не найдено 😔</div>'}</div>
   `;
 });
 
