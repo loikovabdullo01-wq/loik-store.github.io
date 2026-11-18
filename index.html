@@ -126,6 +126,7 @@ header { position: sticky; top: 0; z-index: 100; background: var(--surface); bor
 .btn-primary { background: var(--primary); color: #fff; }
 .btn-primary:hover { background: var(--primary-hover); }
 .btn-outline { border: 1px solid var(--border); color: var(--primary); }
+.btn-outline:hover { background: var(--surface-hover); }
 
 /* ================= МОДАЛЬНОЕ ОКНО ================= */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; display: none; align-items: flex-end; justify-content: center; backdrop-filter: blur(4px); }
@@ -255,13 +256,12 @@ const APPS = [
     shots: [],
     desc: "онлайн интернет магазин"
   }
-
 ];
 
 /* ================= ПЕРЕВОДЫ ================= */
 const TRANSLATIONS = {
-  ru: { home: "Главная", games: "Игры", apps: "Приложения", profile: "Профиль", settings: "Настройки", recommended: "Рекомендуем", all_apps: "Все приложения", all_games: "Все игры", search: "Поиск приложений и игр...", install: "Скачать", open: "Открыть", rating: "Рейтинг", downloads: "Скачиваний", size: "Размер", version: "Версия", about: "Об этом приложении", theme: "Тема оформления", lang: "Язык интерфейса", system: "Системная", light: "Светлая", dark: "Тёмная", profile_title: "Мой профиль", dev_name: "Разработчик Loik", dev_email: "dev@loik.store", my_apps: "Мои приложения", settings_title: "Настройки", settings_theme_desc: "Настройте внешний вид магазина", settings_lang_desc: "Выберите язык интерфейса", theme_saved: "Тема изменена", lang_saved: "Язык изменен", no_apps: "Пока нет приложений. Добавьте их в код!", reviews: "Отзывы и оценки", leave_review: "Оставить отзыв", submit_review: "Отправить", your_name: "Ваше имя", review_placeholder: "Напишите, что вы думаете о приложении...", no_reviews: "Отзывов пока нет. Будьте первым!" },
-  en: { home: "Home", games: "Games", apps: "Apps", profile: "Profile", settings: "Settings", recommended: "Recommended", all_apps: "All apps", all_games: "All games", search: "Search apps and games...", install: "Download", open: "Open", rating: "Rating", downloads: "Downloads", size: "Size", version: "Version", about: "About this app", theme: "Theme", lang: "Language", system: "System", light: "Light", dark: "Dark", profile_title: "My Profile", dev_name: "Loik Developer", dev_email: "dev@loik.store", my_apps: "My apps", settings_title: "Settings", settings_theme_desc: "Customize store appearance", settings_lang_desc: "Choose interface language", theme_saved: "Theme changed", lang_saved: "Language changed", no_apps: "No apps yet. Add them in code!", reviews: "Reviews & Ratings", leave_review: "Leave a review", submit_review: "Submit", your_name: "Your name", review_placeholder: "Write what you think about this app...", no_reviews: "No reviews yet. Be the first!" }
+  ru: { home: "Главная", games: "Игры", apps: "Приложения", profile: "Профиль", settings: "Настройки", recommended: "Рекомендуем", all_apps: "Все приложения", all_games: "Все игры", search: "Поиск приложений и игр...", install: "Скачать", open: "Открыть", rating: "Рейтинг", downloads: "Скачиваний", size: "Размер", version: "Версия", about: "Об этом приложении", theme: "Тема оформления", lang: "Язык интерфейса", system: "Системная", light: "Светлая", dark: "Тёмная", profile_title: "Мой профиль", dev_name: "Разработчик Loik", dev_email: "dev@loik.store", my_apps: "Мои приложения", settings_title: "Настройки", settings_theme_desc: "Настройте внешний вид магазина", settings_lang_desc: "Выберите язык интерфейса", theme_saved: "Тема изменена", lang_saved: "Язык изменен", no_apps: "Пока нет приложений. Добавьте их в код!", reviews: "Отзывы и оценки", leave_review: "Оставить отзыв", submit_review: "Отправить", your_name: "Ваше имя", review_placeholder: "Напишите, что вы думаете о приложении...", no_reviews: "Отзывов пока нет. Будьте первым!", share: "Поделиться", link_copied: "Ссылка скопирована!" },
+  en: { home: "Home", games: "Games", apps: "Apps", profile: "Profile", settings: "Settings", recommended: "Recommended", all_apps: "All apps", all_games: "All games", search: "Search apps and games...", install: "Download", open: "Open", rating: "Rating", downloads: "Downloads", size: "Size", version: "Version", about: "About this app", theme: "Theme", lang: "Language", system: "System", light: "Light", dark: "Dark", profile_title: "My Profile", dev_name: "Loik Developer", dev_email: "dev@loik.store", my_apps: "My apps", settings_title: "Settings", settings_theme_desc: "Customize store appearance", settings_lang_desc: "Choose interface language", theme_saved: "Theme changed", lang_saved: "Language changed", no_apps: "No apps yet. Add them in code!", reviews: "Reviews & Ratings", leave_review: "Leave a review", submit_review: "Submit", your_name: "Your name", review_placeholder: "Write what you think about this app...", no_reviews: "No reviews yet. Be the first!", share: "Share", link_copied: "Link copied!" }
 };
 
 /* ================= ЛОГИКА ================= */
@@ -368,10 +368,15 @@ function renderAppCard(a) {
   `;
 }
 
-function openAppModal(id) {
+function openAppModal(id, updateHash = true) {
   const a = APPS.find(x => x.id === id);
   if (!a) return;
   currentAppId = id;
+
+  // Обновляем ссылку в браузере (Deep Link)
+  if (updateHash) {
+    window.location.hash = 'app/' + id;
+  }
 
   const modal = document.getElementById('app-modal');
   const body = document.getElementById('modal-body');
@@ -399,6 +404,11 @@ function openAppModal(id) {
 
     <div style="display:flex; gap:12px; margin-bottom:24px;">
       <a href="${a.file}" download class="btn btn-primary" style="flex:1; font-size:16px; padding:12px;" onclick="handleDownload('${a.id}')">⬇ ${t('install')}</a>
+      
+      <!-- Кнопка Поделиться -->
+      <button class="btn btn-outline" onclick="shareApp('${a.id}')" style="padding:12px;" title="${t('share')}">
+        <svg style="width:22px;height:22px;fill:currentColor" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+      </button>
     </div>
 
     <h3 style="margin-bottom:12px; font-size:18px">${t('about')}</h3>
@@ -433,6 +443,27 @@ function openAppModal(id) {
   document.body.style.overflow = 'hidden';
 }
 
+// Функция "Поделиться"
+function shareApp(id) {
+  const url = window.location.origin + window.location.pathname + '#app/' + id;
+  
+  if (navigator.share) {
+    navigator.share({
+      title: 'Loik Store',
+      text: 'Посмотри это приложение в Loik Store!',
+      url: url
+    }).catch(console.error);
+  } else {
+    // Если на ПК (нет поддержки нативного шаринга) - копируем в буфер
+    navigator.clipboard.writeText(url).then(() => {
+      showToast(t('link_copied'));
+    }).catch(err => {
+      // Фолбэк, если буфер обмена заблокирован
+      prompt("Скопируйте ссылку:", url);
+    });
+  }
+}
+
 function setStar(n) {
   selectedRating = n;
   document.querySelectorAll('#star-input span').forEach((el, i) => {
@@ -455,9 +486,14 @@ function handleDownload(appId) {
   showToast("Скачивание началось...");
 }
 
-function closeModal() {
+function closeModal(updateHash = true) {
   document.getElementById('app-modal').classList.remove('open');
   document.body.style.overflow = '';
+  
+  // Очищаем хэш в ссылке, если мы закрываем окно
+  if (updateHash) {
+    history.pushState("", document.title, window.location.pathname + window.location.search);
+  }
 }
 
 function renderProfile() {
@@ -529,8 +565,29 @@ document.getElementById('q').addEventListener('input', (e) => {
 document.getElementById('app-modal').addEventListener('click', (e) => { if (e.target.id === 'app-modal') closeModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
+// Слушаем изменения ссылки (например, когда нажимают "Назад" в браузере)
+window.addEventListener('hashchange', () => {
+  const hash = window.location.hash.substring(1);
+  if (hash.startsWith('app/')) {
+    const appId = hash.replace('app/', '');
+    if (currentAppId !== appId) {
+      openAppModal(appId, false); // false = не обновлять хэш еще раз
+    }
+  } else {
+    if (document.getElementById('app-modal').classList.contains('open')) {
+      closeModal(false);
+    }
+  }
+});
+
 initTheme();
 navigate('home');
+
+// Проверяем, есть ли ссылка на приложение при загрузке страницы
+if (window.location.hash.startsWith('#app/')) {
+  const appId = window.location.hash.replace('#app/', '');
+  openAppModal(appId, false);
+}
 </script>
 </body>
 </html>
